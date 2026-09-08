@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — J7 Wings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1830;
+    --navy-2:#16233F;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#2A3654;
+    --line-light:#D8D4CA;
+    --stamp:#2E6B4F;
+    --danger:#C0392B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:#fff;background:var(--navy);min-height:100vh;}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+
+  /* subtle grid background pattern */
+  body{
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+
+  .page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .login-shell{width:100%;max-width:420px;}
+
+  .brand-row{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:32px;}
+  .logo-mark{width:50px;height:50px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .logo-mark svg{width:26px;height:26px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.04em;}
+  .logo-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:var(--amber);text-transform:uppercase;margin-top:6px;}
+
+  .card{background:var(--navy-2);border:1px solid var(--line);padding:34px;}
+  .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .card-head h2{font-size:20px;margin:0;text-transform:none;letter-spacing:0;}
+  .restricted-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:var(--amber);border:1px solid rgba(217,142,43,0.4);padding:3px 8px;text-transform:uppercase;}
+  .card-sub{font-size:13px;color:#8892A3;margin:0 0 26px;}
+
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8892A3;}
+  .field input{background:var(--navy);border:1px solid var(--line);color:#fff;padding:13px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;}
+  .field input::placeholder{color:#59647C;}
+  .field input:focus{border-color:var(--amber);}
+  .pass-row{position:relative;}
+  .pass-row .toggle{position:absolute;right:14px;top:13px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8892A3;cursor:pointer;}
+
+  .row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:13px;}
+  .remember{display:flex;align-items:center;gap:8px;color:#B7BDCB;}
+  .remember input{width:15px;height:15px;accent-color:var(--amber);}
+  .forgot{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--amber);}
+  .forgot:hover{color:#EAA542;}
+
+  .btn-primary{width:100%;background:var(--amber);color:var(--navy);font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:15px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .btn-primary:hover{background:#EAA542;}
+
+  .error-note{display:none;align-items:center;gap:10px;background:rgba(192,57,43,0.12);border:1px solid rgba(192,57,43,0.4);padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#E8A79D;margin-bottom:18px;}
+  .error-note.show{display:flex;}
+
+  .divider{display:flex;align-items:center;gap:14px;margin:26px 0 20px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#59647C;letter-spacing:0.06em;text-transform:uppercase;}
+  .divider::before, .divider::after{content:'';flex:1;height:1px;background:var(--line);}
+
+  .security-note{display:flex;align-items:flex-start;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#59647C;line-height:1.6;}
+  .security-note svg{flex-shrink:0;margin-top:2px;}
+
+  .back-link{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8892A3;}
+  .back-link:hover{color:#fff;}
+
+  .manifest-strip{display:flex;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:10px;color:#59647C;letter-spacing:0.04em;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="login-shell">
+    <div class="brand-row">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#16233F"/></svg>
+      </div>
+      <div class="logo-text">J7 WINGS</div>
+      <div class="logo-sub">Admin Console</div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Admin Sign In</h2>
+        <span class="restricted-tag">Restricted</span>
+      </div>
+      <p class="card-sub">This area is for authorized J7 Wings staff only.</p>
+
+      <div class="error-note" id="errorNote">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18C1.64 18.32 1.55 18.68 1.55 19.04C1.55 20.13 2.43 21 3.51 21H20.49C20.85 21 21.21 20.91 21.53 20.73C22.47 20.19 22.79 18.99 22.25 18.05L13.78 3.86C13.6 3.53 13.34 3.27 13.01 3.09C12.07 2.56 10.87 2.88 10.29 3.86Z" stroke="#E8A79D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Invalid email or password. Please try again.
+      </div>
+
+      <div class="field">
+        <label>Admin Email</label>
+        <input type="email" placeholder="admin@j7wings.com">
+      </div>
+
+      <div class="field pass-row">
+        <label>Password</label>
+        <input type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+        <span class="toggle">SHOW</span>
+      </div>
+
+      <div class="row-between">
+        <label class="remember"><input type="checkbox"> Keep me signed in</label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+
+      <button class="btn-primary" onclick="document.getElementById('errorNote').classList.toggle('show')">Sign In to Admin</button>
+
+      <div class="divider">Security</div>
+      <div class="security-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="1" stroke="#59647C" stroke-width="1.6"/><path d="M8 11V7C8 4.79 9.79 3 12 3C14.21 3 16 4.79 16 7V11" stroke="#59647C" stroke-width="1.6"/></svg>
+        <span>All sign-in attempts are logged. This console is protected by Firebase Authentication and limited to whitelisted admin accounts only.</span>
+      </div>
+
+      <div class="manifest-strip">
+        <span>SESSION: SECURE</span>
+        <span>ENV: PRODUCTION</span>
+      </div>
+    </div>
+
+    <a href="j7wings_homepage.html" class="back-link">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="#8892A3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to storefront
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+
+  .page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+
+  /* left brand panel */
+  .brand-panel{background:var(--navy);color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .brand-panel .logo{display:flex;align-items:center;gap:12px;}
+  .logo-mark{width:42px;height:42px;background:var(--amber);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:24px;height:24px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:400;letter-spacing:0.18em;color:var(--amber);text-transform:uppercase;margin-top:4px;}
+
+  .brand-mid{max-width:420px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.16em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--amber);}
+  .brand-mid h1{font-size:34px;line-height:1.15;margin:0 0 16px;}
+  .brand-mid p{font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.7;color:#C9CEDA;margin:0;}
+
+  .manifest{background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.3);padding:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .manifest .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .manifest .row:last-child{border-bottom:none;}
+  .manifest .k{color:#8892A3;}
+  .manifest .v{font-weight:600;color:#fff;}
+
+  .crate-tag{position:absolute;background:#fff;color:var(--navy);border-radius:3px;padding:12px 14px;box-shadow:0 12px 28px rgba(0,0,0,0.25);font-family:'IBM Plex Mono',monospace;opacity:0.95;}
+  .crate-tag .k{font-size:9px;color:#8A8F9B;letter-spacing:0.08em;text-transform:uppercase;}
+  .crate-tag .v{font-size:13px;font-weight:600;}
+
+  /* right form panel */
+  .form-panel{background:#fff;display:flex;align-items:center;justify-content:center;padding:40px;}
+  .form-box{width:100%;max-width:400px;}
+  .form-tabs{display:flex;border:1.5px solid var(--navy);margin-bottom:32px;}
+  .form-tabs button{flex:1;background:#fff;border:none;padding:13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;cursor:pointer;color:var(--navy);}
+  .form-tabs button.active{background:var(--navy);color:#fff;}
+
+  .form-box h2{font-size:24px;margin:0 0 8px;text-transform:none;letter-spacing:0;}
+  .form-sub{font-size:13.5px;color:#6E6A5F;margin:0 0 28px;}
+
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;}
+  .field input{border:1px solid var(--line);padding:13px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;}
+  .field input:focus{border-color:var(--navy);}
+  .pass-row{position:relative;}
+  .pass-row .toggle{position:absolute;right:14px;top:13px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;cursor:pointer;}
+
+  .row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:13px;}
+  .remember{display:flex;align-items:center;gap:8px;color:#4A4A46;}
+  .remember input{width:15px;height:15px;accent-color:var(--navy);}
+  .forgot{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--navy);}
+  .forgot:hover{color:var(--amber-dark);}
+
+  .btn-primary{width:100%;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:15px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .btn-primary:hover{background:var(--navy-2);}
+
+  .divider{display:flex;align-items:center;gap:14px;margin:26px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#A6A196;letter-spacing:0.06em;text-transform:uppercase;}
+  .divider::before, .divider::after{content:'';flex:1;height:1px;background:var(--line);}
+
+  .wholesale-note{background:var(--paper);border:1px solid var(--line);padding:16px 18px;font-size:12.5px;line-height:1.6;color:#4A4A46;}
+  .wholesale-note strong{color:var(--navy);}
+  .wholesale-note a{color:var(--amber-dark);font-weight:600;}
+
+  .signup-fields{display:none;}
+  .signup-active .signup-fields{display:block;}
+  .signup-active .login-only{display:none;}
+
+  @media(max-width:860px){
+    .page{grid-template-columns:1fr;}
+    .brand-panel{padding:36px 28px;min-height:280px;}
+    .brand-mid h1{font-size:26px;}
+    .crate-tag{display:none;}
+    .manifest{display:none;}
+    .form-panel{padding:36px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="brand-panel">
+    <a href="j7wings_homepage.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#16233F"/></svg>
+      </div>
+      <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+    </a>
+
+    <div class="brand-mid">
+      <div class="eyebrow">Buyer Access</div>
+      <h1>Your account, your case-pack pricing.</h1>
+      <p>Sign in to view wholesale rates, reorder past invoices, and track dispatch status on every order.</p>
+    </div>
+
+    <div class="manifest">
+      <div class="row"><span class="k">ACCOUNT TYPE</span><span class="v">WHOLESALE / RESELLER</span></div>
+      <div class="row"><span class="k">MIN. ORDER</span><span class="v">$500</span></div>
+      <div class="row"><span class="k">SUPPORT</span><span class="v">MON&ndash;SAT, 9AM&ndash;6PM</span></div>
+    </div>
+
+    <div class="crate-tag" style="top:60px;right:56px;">
+      <div class="k">Item #10001</div>
+      <div class="v">In Stock &middot; CP 12</div>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <div class="form-box" id="formBox">
+      <div class="form-tabs">
+        <button class="active" onclick="setMode(false)">Sign In</button>
+        <button onclick="setMode(true)">Create Account</button>
+      </div>
+
+      <h2 id="formTitle">Welcome back</h2>
+      <p class="form-sub" id="formSub">Sign in to your wholesale account to continue.</p>
+
+      <div class="signup-fields">
+        <div class="field">
+          <label>Business Name</label>
+          <input type="text" placeholder="e.g. Sunrise General Store">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@business.com">
+      </div>
+
+      <div class="field pass-row">
+        <label>Password</label>
+        <input type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+        <span class="toggle">SHOW</span>
+      </div>
+
+      <div class="signup-fields">
+        <div class="field">
+          <label>Confirm Password</label>
+          <input type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
+        </div>
+      </div>
+
+      <div class="row-between login-only">
+        <label class="remember"><input type="checkbox"> Remember me</label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+
+      <button class="btn-primary" id="submitBtn">Sign In</button>
+
+      <div class="divider">Wholesale Buyers</div>
+
+      <div class="wholesale-note">
+        <strong>New to J7 Wings?</strong> Creating an account gives you access to case-pack pricing and order tracking. Approval is instant for verified businesses &mdash; <a href="#">learn more</a>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function setMode(isSignup){
+  const box = document.getElementById('formBox');
+  const tabs = document.querySelectorAll('.form-tabs button');
+  const title = document.getElementById('formTitle');
+  const sub = document.getElementById('formSub');
+  const btn = document.getElementById('submitBtn');
+  tabs[0].classList.toggle('active', !isSignup);
+  tabs[1].classList.toggle('active', isSignup);
+  box.classList.toggle('signup-active', isSignup);
+  title.textContent = isSignup ? 'Create your account' : 'Welcome back';
+  sub.textContent = isSignup ? 'Set up wholesale access in under a minute.' : 'Sign in to your wholesale account to continue.';
+  btn.textContent = isSignup ? 'Create Account' : 'Sign In';
+}
+</script>
+
+</body>
+</html>

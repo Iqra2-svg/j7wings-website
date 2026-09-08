@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Product — J7 Wings Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1830;
+    --navy-2:#16233F;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+    --danger:#C0392B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  button{font-family:inherit;}
+
+  .shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh;}
+
+  .sidebar{background:var(--navy);color:#B7BDCB;padding:22px 0;display:flex;flex-direction:column;}
+  .side-logo{display:flex;align-items:center;gap:10px;padding:0 20px 26px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:16px;}
+  .logo-mark{width:32px;height:32px;background:var(--amber);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:18px;height:18px;}
+  .side-logo .t{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:0.03em;line-height:1.1;}
+  .side-logo .s{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--amber);letter-spacing:0.14em;text-transform:uppercase;}
+  .nav-group{padding:0 12px;margin-bottom:20px;}
+  .nav-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#59647C;padding:0 12px;margin-bottom:8px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;font-size:13.5px;font-weight:500;border-radius:4px;cursor:pointer;}
+  .nav-item svg{width:17px;height:17px;flex-shrink:0;}
+  .nav-item:hover{background:rgba(255,255,255,0.05);color:#fff;}
+  .nav-item.active{background:var(--amber);color:var(--navy);font-weight:700;}
+  .sidebar-foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+  .admin-chip{display:flex;align-items:center;gap:10px;}
+  .admin-avatar{width:32px;height:32px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;color:var(--navy);font-size:13px;}
+  .admin-name{font-size:12.5px;font-weight:600;color:#fff;}
+  .admin-role{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#59647C;}
+
+  .main{padding:26px 32px 60px;max-width:920px;}
+  .breadcrumb-row{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A8577;margin-bottom:10px;}
+  .breadcrumb-row a:hover{color:var(--amber-dark);}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:26px;}
+  .topbar h1{font-size:22px;margin:0 0 4px;}
+  .mode-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;}
+  .top-actions{display:flex;gap:10px;}
+  .btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--navy);font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.03em;padding:11px 20px;cursor:pointer;font-size:13px;text-transform:uppercase;}
+  .btn-outline:hover{background:var(--paper);}
+  .btn-primary{background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:11px 22px;border:none;cursor:pointer;font-size:13px;text-transform:uppercase;}
+  .btn-primary:hover{background:var(--navy-2);}
+
+  .form-card{background:#fff;border:1px solid var(--line);padding:26px;margin-bottom:20px;}
+  .form-card h3{font-size:14.5px;margin:0 0 4px;display:flex;align-items:center;gap:10px;}
+  .form-card h3 .num{width:22px;height:22px;background:var(--navy);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;}
+  .form-card .card-sub{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;margin:0 0 20px;padding-left:32px;}
+
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .field-row.three{grid-template-columns:1fr 1fr 1fr;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;display:flex;justify-content:space-between;align-items:center;}
+  .field input, .field select, .field textarea{border:1px solid var(--line);padding:11px 12px;font-family:'Inter',sans-serif;font-size:13.5px;outline:none;background:#fff;}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--navy);}
+  .field-hint{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#A6A196;}
+  .add-new-link{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber-dark);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0;}
+  .add-new-link:hover{color:var(--navy);}
+
+  /* inline new category box */
+  .new-cat-box{display:none;background:var(--paper);border:1px dashed var(--navy);padding:16px;margin-top:10px;grid-column:1/-1;}
+  .new-cat-box.show{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end;}
+  .new-cat-box .field label{color:var(--navy);}
+  .new-cat-box button{background:var(--stamp);color:#fff;border:none;padding:11px 16px;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;cursor:pointer;height:fit-content;}
+
+  /* image upload */
+  .upload-zone{border:1.5px dashed var(--line);background:var(--paper);padding:30px;text-align:center;cursor:pointer;}
+  .upload-zone:hover{border-color:var(--navy);}
+  .upload-zone svg{width:34px;height:34px;opacity:0.5;margin-bottom:10px;}
+  .upload-zone .t1{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+  .upload-zone .t2{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;}
+  .thumb-preview-row{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;}
+  .thumb-preview{width:70px;height:70px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;}
+  .thumb-preview svg{width:30px;height:30px;opacity:0.7;}
+  .thumb-preview .rm{position:absolute;top:-7px;right:-7px;width:18px;height:18px;background:var(--danger);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;}
+  .thumb-preview.add-more{border-style:dashed;cursor:pointer;color:#8A8577;}
+
+  /* stock status control */
+  .stock-toggle-group{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .stock-option{border:1.5px solid var(--line);padding:14px;cursor:pointer;text-align:center;}
+  .stock-option input{display:none;}
+  .stock-option .dot{width:10px;height:10px;border-radius:50%;margin:0 auto 8px;}
+  .stock-option .lbl{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.03em;}
+  .stock-option.in .dot{background:var(--stamp);}
+  .stock-option.low .dot{background:var(--amber);}
+  .stock-option.out .dot{background:var(--danger);}
+  .stock-option.selected.in{border-color:var(--stamp);background:#E7F1EA;}
+  .stock-option.selected.low{border-color:var(--amber);background:#FBF2E3;}
+  .stock-option.selected.out{border-color:var(--danger);background:#FAE4E0;}
+
+  .qty-warning{display:none;align-items:center;gap:8px;background:#FAE4E0;border:1px solid rgba(192,57,43,0.3);padding:10px 14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--danger);margin-top:14px;}
+  .qty-warning.show{display:flex;}
+
+  .form-footer{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);padding:18px 26px;position:sticky;bottom:20px;}
+  .form-footer .left{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;}
+  .form-footer .actions{display:flex;gap:10px;}
+  .btn-danger-outline{background:#fff;color:var(--danger);border:1.5px solid var(--danger);font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.03em;padding:11px 20px;cursor:pointer;font-size:13px;text-transform:uppercase;}
+  .btn-danger-outline:hover{background:#FAE4E0;}
+
+  @media(max-width:1000px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{display:none;}
+    .field-row, .field-row.three{grid-template-columns:1fr;}
+    .stock-toggle-group{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="side-logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#16233F"/></svg></div>
+      <div><div class="t">J7 WINGS</div><div class="s">Admin Console</div></div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 13H10V3H3V13ZM3 21H10V15H3V21ZM12 21H21V11H12V21ZM12 3V9H21V3H12Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Dashboard
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Catalog</div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 7L12 3L21 7M3 7L12 11M3 7V17L12 21M21 7L12 11M21 7V17L12 21M12 11V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Products
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Orders
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21M23 21V19C23 17.13 21.73 15.56 20 15.11M16 3.11C17.73 3.56 19 5.13 19 7C19 8.87 17.73 10.44 16 10.89M13 7C13 9.21 11.21 11 9 11C6.79 11 5 9.21 5 7C5 4.79 6.79 3 9 3C11.21 3 13 4.79 13 7Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Customers
+      </div>
+    </div>
+    <div class="sidebar-foot">
+      <div class="admin-chip">
+        <div class="admin-avatar">IQ</div>
+        <div><div class="admin-name">Iqra Shah</div><div class="admin-role">SUPER ADMIN</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb-row"><a href="j7wings_admin_dashboard.html">Dashboard</a> / <a href="j7wings_admin_dashboard.html">Products</a> / <span style="color:var(--navy);font-weight:600;">Add Product</span></div>
+
+    <div class="topbar">
+      <div>
+        <h1>Add / Edit Product</h1>
+        <div class="mode-tag">// Editing: NEW PRODUCT &mdash; not yet saved</div>
+      </div>
+      <div class="top-actions">
+        <button class="btn-outline">Cancel</button>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3><span class="num">1</span> Category</h3>
+      <p class="card-sub">Choose an existing category, or add a new one if it doesn't exist yet.</p>
+      <div class="field-row">
+        <div class="field">
+          <label>Main Category <span class="add-new-link" onclick="toggleNewCat('cat')">+ Add New Category</span></label>
+          <select id="mainCat">
+            <option>T-Shirts</option>
+            <option>Shoes</option>
+            <option>Crockery</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Sub-Category <span class="add-new-link" onclick="toggleNewCat('sub')">+ Add New Sub-Category</span></label>
+          <select id="subCat">
+            <option>Men's T-Shirts</option>
+            <option>Women's T-Shirts</option>
+            <option>Kids T-Shirts</option>
+            <option>Graphic Tees</option>
+            <option>Plain/Basic Tees</option>
+          </select>
+        </div>
+
+        <div class="new-cat-box" id="newCatBox">
+          <div class="field">
+            <label>New Category Name</label>
+            <input type="text" placeholder="e.g. Home Textiles">
+          </div>
+          <div class="field">
+            <label>Belongs Under (optional)</label>
+            <select><option>None &mdash; New Main Category</option><option>T-Shirts</option><option>Shoes</option><option>Crockery</option></select>
+          </div>
+          <button onclick="toggleNewCat()">Save Category</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3><span class="num">2</span> Product Information</h3>
+      <p class="card-sub">Basic details shown to buyers on the product page.</p>
+      <div class="field-row">
+        <div class="field full">
+          <label>Product Name</label>
+          <input type="text" placeholder="e.g. Men's Crew Neck Cotton Tee, Assorted Colors">
+        </div>
+      </div>
+      <div class="field-row three">
+        <div class="field">
+          <label>Item # (SKU)</label>
+          <input type="text" placeholder="10009">
+        </div>
+        <div class="field">
+          <label>Price ($ per unit)</label>
+          <input type="text" placeholder="3.50">
+        </div>
+        <div class="field">
+          <label>Case Pack (CP)</label>
+          <input type="text" placeholder="12">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field full">
+          <label>Description</label>
+          <textarea rows="3" placeholder="Short description shown on the product detail page&hellip;"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3><span class="num">3</span> Product Images</h3>
+      <p class="card-sub">Upload one main image and optional additional angles.</p>
+      <div class="upload-zone">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4M12 4L7 9M12 4L17 9M4 20H20" stroke="#16233F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="t1">Click to upload or drag and drop</div>
+        <div class="t2">PNG, JPG up to 5MB each</div>
+      </div>
+      <div class="thumb-preview-row">
+        <div class="thumb-preview">
+          <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg>
+          <div class="rm">&times;</div>
+        </div>
+        <div class="thumb-preview add-more">+</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3><span class="num">4</span> Inventory &amp; Stock Status</h3>
+      <p class="card-sub">Set the quantity on hand and mark availability &mdash; you can update this anytime a product runs out.</p>
+      <div class="field-row">
+        <div class="field">
+          <label>Quantity on Hand (units)</label>
+          <input type="text" id="qtyInput" placeholder="0" oninput="checkQty()">
+        </div>
+        <div class="field">
+          <label>Low Stock Threshold</label>
+          <input type="text" placeholder="20">
+          <span class="field-hint">Alerts you on the dashboard below this number</span>
+        </div>
+      </div>
+
+      <div class="field full" style="margin-top:6px;">
+        <label>Stock Status</label>
+        <div class="stock-toggle-group">
+          <label class="stock-option in selected" id="opt-in">
+            <input type="radio" name="stock" checked onclick="setStock('in')">
+            <div class="dot"></div>
+            <div class="lbl">IN STOCK</div>
+          </label>
+          <label class="stock-option low" id="opt-low">
+            <input type="radio" name="stock" onclick="setStock('low')">
+            <div class="dot"></div>
+            <div class="lbl">LOW STOCK</div>
+          </label>
+          <label class="stock-option out" id="opt-out">
+            <input type="radio" name="stock" onclick="setStock('out')">
+            <div class="dot"></div>
+            <div class="lbl">OUT OF STOCK</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="qty-warning" id="qtyWarning">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18C1.64 18.32 1.55 18.68 1.55 19.04C1.55 20.13 2.43 21 3.51 21H20.49C20.85 21 21.21 20.91 21.53 20.73C22.47 20.19 22.79 18.99 22.25 18.05L13.78 3.86C13.6 3.53 13.34 3.27 13.01 3.09C12.07 2.56 10.87 2.88 10.29 3.86Z" stroke="#C0392B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Quantity is 0 &mdash; this product will automatically show as "Out of Stock" on the storefront.
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <span class="left">// Changes are not saved until you click "Save Product"</span>
+      <div class="actions">
+        <button class="btn-danger-outline">Delete Product</button>
+        <button class="btn-primary">Save Product</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+function toggleNewCat(){
+  document.getElementById('newCatBox').classList.toggle('show');
+}
+function setStock(status){
+  document.getElementById('opt-in').classList.toggle('selected', status==='in');
+  document.getElementById('opt-low').classList.toggle('selected', status==='low');
+  document.getElementById('opt-out').classList.toggle('selected', status==='out');
+  if(status==='out'){
+    document.getElementById('qtyInput').value = 0;
+    document.getElementById('qtyWarning').classList.add('show');
+  } else {
+    document.getElementById('qtyWarning').classList.remove('show');
+  }
+}
+function checkQty(){
+  const val = parseInt(document.getElementById('qtyInput').value) || 0;
+  const warning = document.getElementById('qtyWarning');
+  if(val === 0){
+    setStock('out');
+  } else {
+    warning.classList.remove('show');
+  }
+}
+</script>
+
+</body>
+</html>

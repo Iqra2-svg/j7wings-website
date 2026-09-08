@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — J7 Wings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1830;
+    --navy-2:#16233F;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+    --danger:#C0392B;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+
+  .shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh;}
+
+  /* sidebar */
+  .sidebar{background:var(--navy);color:#B7BDCB;padding:22px 0;display:flex;flex-direction:column;}
+  .side-logo{display:flex;align-items:center;gap:10px;padding:0 20px 26px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:16px;}
+  .logo-mark{width:32px;height:32px;background:var(--amber);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:18px;height:18px;}
+  .side-logo .t{font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#fff;letter-spacing:0.03em;line-height:1.1;}
+  .side-logo .s{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:var(--amber);letter-spacing:0.14em;text-transform:uppercase;}
+
+  .nav-group{padding:0 12px;margin-bottom:20px;}
+  .nav-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#59647C;padding:0 12px;margin-bottom:8px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:10px 12px;font-size:13.5px;font-weight:500;border-radius:4px;cursor:pointer;}
+  .nav-item svg{width:17px;height:17px;flex-shrink:0;}
+  .nav-item:hover{background:rgba(255,255,255,0.05);color:#fff;}
+  .nav-item.active{background:var(--amber);color:var(--navy);font-weight:700;}
+  .nav-item .badge{margin-left:auto;background:var(--danger);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:1px 6px;border-radius:999px;}
+  .nav-item.active .badge{background:var(--navy);color:#fff;}
+
+  .sidebar-foot{margin-top:auto;padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
+  .admin-chip{display:flex;align-items:center;gap:10px;}
+  .admin-avatar{width:32px;height:32px;background:var(--amber);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;color:var(--navy);font-size:13px;}
+  .admin-name{font-size:12.5px;font-weight:600;color:#fff;}
+  .admin-role{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#59647C;}
+
+  /* main */
+  .main{padding:26px 32px 50px;}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+  .topbar h1{font-size:22px;margin:0;}
+  .topbar .date{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#8A8577;margin-top:4px;}
+  .btn-primary{background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.03em;padding:12px 22px;border:none;cursor:pointer;font-size:13px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+  .btn-primary:hover{background:var(--navy-2);}
+
+  /* stat cards */
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px;}
+  .stat-card{background:#fff;border:1px solid var(--line);padding:20px;}
+  .stat-card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+  .stat-icon{width:36px;height:36px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .stat-icon svg{width:18px;height:18px;}
+  .stat-trend{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:var(--stamp);}
+  .stat-trend.down{color:var(--danger);}
+  .stat-card .n{font-family:'Oswald',sans-serif;font-size:26px;font-weight:700;color:var(--navy);}
+  .stat-card .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8577;letter-spacing:0.05em;text-transform:uppercase;margin-top:4px;}
+
+  /* products table card */
+  .table-card{background:#fff;border:1px solid var(--line);margin-bottom:24px;}
+  .table-head{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:12px;}
+  .table-head h3{font-size:15px;margin:0;text-transform:none;letter-spacing:0;}
+  .table-tools{display:flex;gap:10px;align-items:center;}
+  .search-box{display:flex;align-items:center;border:1px solid var(--line);padding:8px 12px;gap:8px;}
+  .search-box input{border:none;outline:none;font-family:'Inter',sans-serif;font-size:13px;width:180px;}
+  .cat-select{border:1px solid var(--line);padding:9px 10px;font-family:'Inter',sans-serif;font-size:13px;background:#fff;}
+
+  table{width:100%;border-collapse:collapse;}
+  thead tr{background:var(--paper);}
+  th{text-align:left;padding:12px 22px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;border-bottom:1px solid var(--line);}
+  td{padding:14px 22px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:middle;}
+  tbody tr:hover{background:#FAFAF7;}
+  .p-cell{display:flex;align-items:center;gap:12px;}
+  .p-thumb{width:42px;height:42px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .p-thumb svg{width:20px;height:20px;opacity:0.8;}
+  .p-name{font-weight:600;font-size:13px;}
+  .p-cat{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8577;}
+  .item-code{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6E6A5F;}
+  .price-cell{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--navy);}
+  .stock-badge{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:2px;}
+  .stock-badge.in{background:#E7F1EA;color:var(--stamp);}
+  .stock-badge.low{background:#FBF2E3;color:var(--amber-dark);}
+  .stock-badge.out{background:#FAE4E0;color:var(--danger);}
+  .row-actions{display:flex;gap:8px;}
+  .icon-btn{width:30px;height:30px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .icon-btn:hover{border-color:var(--navy);}
+  .icon-btn.del:hover{border-color:var(--danger);}
+  .icon-btn.del:hover svg path{stroke:var(--danger);}
+
+  .table-foot{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A8577;}
+  .pager{display:flex;gap:6px;}
+  .pager button{width:28px;height:28px;border:1px solid var(--line);background:#fff;cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .pager button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* two column bottom */
+  .bottom-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;}
+  .panel{background:#fff;border:1px solid var(--line);padding:22px;}
+  .panel h3{font-size:15px;margin:0 0 16px;text-transform:none;letter-spacing:0;}
+  .order-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);}
+  .order-row:last-child{border-bottom:none;}
+  .order-id{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--navy);}
+  .order-cust{font-size:12.5px;color:#6E6A5F;margin-top:2px;}
+  .order-amt{font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;}
+  .status-chip{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;padding:3px 8px;border-radius:2px;text-transform:uppercase;}
+  .status-chip.dispatch{background:#FBF2E3;color:var(--amber-dark);}
+  .status-chip.delivered{background:#E7F1EA;color:var(--stamp);}
+
+  .low-stock-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);}
+  .low-stock-row:last-child{border-bottom:none;}
+  .low-stock-row .p-thumb{width:36px;height:36px;}
+  .low-stock-name{font-size:12.5px;font-weight:600;}
+  .low-stock-qty{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--danger);margin-top:2px;}
+
+  @media(max-width:1000px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{display:none;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .bottom-grid{grid-template-columns:1fr;}
+    table{display:block;overflow-x:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="side-logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#16233F"/></svg></div>
+      <div><div class="t">J7 WINGS</div><div class="s">Admin Console</div></div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Overview</div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 13H10V3H3V13ZM3 21H10V15H3V21ZM12 21H21V11H12V21ZM12 3V9H21V3H12Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Dashboard
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Catalog</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="currentColor" stroke-width="1.4" transform="scale(0.35)"/><path d="M3 7L12 3L21 7M3 7L12 11M3 7V17L12 21M21 7L12 11M21 7V17L12 21M12 11V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Products
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16M9 21C9.6 21 10 20.6 10 20C10 19.4 9.6 19 9 19C8.4 19 8 19.4 8 20C8 20.6 8.4 21 9 21ZM17 21C17.6 21 18 20.6 18 20C18 19.4 17.6 19 17 19C16.4 19 16 19.4 16 20C16 20.6 16.4 21 17 21Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Orders
+        <span class="badge">4</span>
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21M23 21V19C23 17.13 21.73 15.56 20 15.11M16 3.11C17.73 3.56 19 5.13 19 7C19 8.87 17.73 10.44 16 10.89M13 7C13 9.21 11.21 11 9 11C6.79 11 5 9.21 5 7C5 4.79 6.79 3 9 3C11.21 3 13 4.79 13 7Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Customers
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-label">Account</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15Z" stroke="currentColor" stroke-width="1.7"/><path d="M19.4 15C19.26 15.31 19.22 15.66 19.29 16C19.36 16.34 19.53 16.65 19.79 16.89L19.85 16.95C20.06 17.16 20.23 17.41 20.35 17.68C20.46 17.96 20.52 18.25 20.52 18.55C20.52 18.85 20.46 19.14 20.35 19.42C20.23 19.69 20.06 19.94 19.85 20.15C19.64 20.36 19.39 20.53 19.11 20.65C18.84 20.76 18.54 20.82 18.24 20.82C17.94 20.82 17.65 20.76 17.37 20.65C17.1 20.53 16.85 20.36 16.64 20.15L16.58 20.09C16.35 19.83 16.04 19.66 15.7 19.59C15.36 19.52 15.01 19.56 14.7 19.7C14.4 19.83 14.14 20.05 13.96 20.32C13.78 20.6 13.68 20.92 13.68 21.25V21.42C13.68 22.02 13.44 22.6 13.02 23.02C12.6 23.44 12.02 23.68 11.42 23.68C10.82 23.68 10.24 23.44 9.82 23.02C9.4 22.6 9.16 22.02 9.16 21.42V21.33C9.15 20.99 9.04 20.66 8.84 20.38C8.64 20.1 8.36 19.89 8.04 19.78C7.73 19.64 7.38 19.6 7.04 19.67C6.7 19.74 6.39 19.91 6.16 20.15L6.1 20.21C5.89 20.42 5.64 20.59 5.37 20.71C5.09 20.82 4.8 20.88 4.5 20.88C4.2 20.88 3.9 20.82 3.63 20.71C3.35 20.59 3.1 20.42 2.89 20.21C2.68 20 2.51 19.75 2.4 19.47C2.28 19.2 2.22 18.9 2.22 18.6C2.22 18.3 2.28 18.01 2.4 17.73C2.51 17.46 2.68 17.21 2.89 17L2.95 16.94C3.21 16.71 3.38 16.4 3.45 16.06C3.52 15.72 3.48 15.37 3.34 15.06C3.21 14.76 2.99 14.5 2.72 14.32C2.44 14.14 2.12 14.04 1.79 14.04H1.62C1.02 14.04 0.44 13.8 0.02 13.38C-0.4 12.96 -0.64 12.38 -0.64 11.78" stroke="currentColor" stroke-width="0.001"/><circle cx="12" cy="12" r="1"/></svg>
+        Settings
+      </div>
+    </div>
+
+    <div class="sidebar-foot">
+      <div class="admin-chip">
+        <div class="admin-avatar">IQ</div>
+        <div><div class="admin-name">Iqra Shah</div><div class="admin-role">SUPER ADMIN</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <div class="date">THURSDAY, AUGUST 06, 2026</div>
+      </div>
+      <button class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.3" stroke-linecap="round"/></svg>
+        Add Product
+      </button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="top">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 7L12 3L21 7M3 7L12 11M3 7V17L12 21M21 7L12 11M21 7V17L12 21M12 11V21" stroke="#16233F" stroke-width="1.7" stroke-linejoin="round"/></svg></div>
+          <span class="stat-trend">+5 THIS WEEK</span>
+        </div>
+        <div class="n">25</div>
+        <div class="l">Total Products</div>
+      </div>
+      <div class="stat-card">
+        <div class="top">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16" stroke="#16233F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="stat-trend">+2 TODAY</span>
+        </div>
+        <div class="n">4</div>
+        <div class="l">Pending Orders</div>
+      </div>
+      <div class="stat-card">
+        <div class="top">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 9V13M12 17H12.01M10.29 3.86L1.82 18C1.64 18.32 1.55 18.68 1.55 19.04C1.55 20.13 2.43 21 3.51 21H20.49C20.85 21 21.21 20.91 21.53 20.73C22.47 20.19 22.79 18.99 22.25 18.05L13.78 3.86C13.6 3.53 13.34 3.27 13.01 3.09C12.07 2.56 10.87 2.88 10.29 3.86Z" stroke="#B5721A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <span class="stat-trend down">ACTION NEEDED</span>
+        </div>
+        <div class="n">3</div>
+        <div class="l">Low Stock Items</div>
+      </div>
+      <div class="stat-card">
+        <div class="top">
+          <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 1V23M17 5H9.5C8.57 5 7.69 5.37 7.03 6.03C6.37 6.69 6 7.57 6 8.5C6 9.43 6.37 10.31 7.03 10.97C7.69 11.63 8.57 12 9.5 12H14.5C15.43 12 16.31 12.37 16.97 13.03C17.63 13.69 18 14.57 18 15.5C18 16.43 17.63 17.31 16.97 17.97C16.31 18.63 15.43 19 14.5 19H6" stroke="#16233F" stroke-width="1.7" stroke-linecap="round"/></svg></div>
+          <span class="stat-trend">+12% MTD</span>
+        </div>
+        <div class="n">$4,210</div>
+        <div class="l">Revenue (This Month)</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-head">
+        <h3>Product Catalog</h3>
+        <div class="table-tools">
+          <div class="search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 21L15.5 15.5M17.5 10.5C17.5 14.09 14.59 17 11 17C7.41 17 4.5 14.09 4.5 10.5C4.5 6.91 7.41 4 11 4C14.59 4 17.5 6.91 17.5 10.5Z" stroke="#8A8577" stroke-width="1.8"/></svg>
+            <input type="text" placeholder="Search products&hellip;">
+          </div>
+          <select class="cat-select"><option>All Categories</option><option>T-Shirts</option><option>Shoes</option><option>Crockery</option></select>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th><th>Item#</th><th>Category</th><th>Price</th><th>CP</th><th>Stock</th><th>Status</th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="p-cell">
+                <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.4"/></svg></div>
+                <div><div class="p-name">Men's Crew Neck Cotton Tee</div><div class="p-cat">Men's T-Shirts</div></div>
+              </div>
+            </td>
+            <td class="item-code">#10001</td>
+            <td>T-Shirts</td>
+            <td class="price-cell">$3.50</td>
+            <td class="mono">12</td>
+            <td class="mono">336</td>
+            <td><span class="stock-badge in">In Stock</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 3C17.53 2.47 18.24 2.17 19 2.17C19.76 2.17 20.47 2.47 21 3C21.53 3.53 21.83 4.24 21.83 5C21.83 5.76 21.53 6.47 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+                <button class="icon-btn del"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="p-cell">
+                <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M8 46C8 46 12 38 20 38C24 38 24 42 30 42C36 42 38 34 46 34C52 34 56 40 56 40V50H8V46Z" stroke="#16233F" stroke-width="2.4"/></svg></div>
+                <div><div class="p-name">Men's Casual Sneakers</div><div class="p-cat">Men's Shoes</div></div>
+              </div>
+            </td>
+            <td class="item-code">#20001</td>
+            <td>Shoes</td>
+            <td class="price-cell">$12.50</td>
+            <td class="mono">6</td>
+            <td class="mono">18</td>
+            <td><span class="stock-badge low">Low Stock</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 3C17.53 2.47 18.24 2.17 19 2.17C19.76 2.17 20.47 2.47 21 3C21.53 3.53 21.83 4.24 21.83 5C21.83 5.76 21.53 6.47 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+                <button class="icon-btn del"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="p-cell">
+                <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.4"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.4"/></svg></div>
+                <div><div class="p-name">16-Piece Dinnerware Set</div><div class="p-cat">Dinner Sets</div></div>
+              </div>
+            </td>
+            <td class="item-code">#30003</td>
+            <td>Crockery</td>
+            <td class="price-cell">$22.00</td>
+            <td class="mono">2</td>
+            <td class="mono">0</td>
+            <td><span class="stock-badge out">Out of Stock</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 3C17.53 2.47 18.24 2.17 19 2.17C19.76 2.17 20.47 2.47 21 3C21.53 3.53 21.83 4.24 21.83 5C21.83 5.76 21.53 6.47 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+                <button class="icon-btn del"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="p-cell">
+                <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.4"/></svg></div>
+                <div><div class="p-name">Women's Fitted Tee</div><div class="p-cat">Women's T-Shirts</div></div>
+              </div>
+            </td>
+            <td class="item-code">#10003</td>
+            <td>T-Shirts</td>
+            <td class="price-cell">$3.90</td>
+            <td class="mono">12</td>
+            <td class="mono">204</td>
+            <td><span class="stock-badge in">In Stock</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 3C17.53 2.47 18.24 2.17 19 2.17C19.76 2.17 20.47 2.47 21 3C21.53 3.53 21.83 4.24 21.83 5C21.83 5.76 21.53 6.47 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+                <button class="icon-btn del"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="p-cell">
+                <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.4"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.4"/></svg></div>
+                <div><div class="p-name">Ceramic Coffee Mug, 11oz</div><div class="p-cat">Mugs</div></div>
+              </div>
+            </td>
+            <td class="item-code">#40002</td>
+            <td>Crockery</td>
+            <td class="price-cell">$1.50</td>
+            <td class="mono">36</td>
+            <td class="mono">540</td>
+            <td><span class="stock-badge in">In Stock</span></td>
+            <td>
+              <div class="row-actions">
+                <button class="icon-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M17 3C17.53 2.47 18.24 2.17 19 2.17C19.76 2.17 20.47 2.47 21 3C21.53 3.53 21.83 4.24 21.83 5C21.83 5.76 21.53 6.47 21 7L7.5 20.5L2 22L3.5 16.5L17 3Z" stroke="#16233F" stroke-width="1.6" stroke-linejoin="round"/></svg></button>
+                <button class="icon-btn del"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-foot">
+        <span>SHOWING 5 OF 25 PRODUCTS</span>
+        <div class="pager">
+          <button>&lsaquo;</button>
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>&rsaquo;</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-grid">
+      <div class="panel">
+        <h3>Recent Orders</h3>
+        <div class="order-row">
+          <div><div class="order-id">#J7W-20260806-0142</div><div class="order-cust">Sunrise General Store</div></div>
+          <span class="status-chip dispatch">Preparing</span>
+          <div class="order-amt">$161.00</div>
+        </div>
+        <div class="order-row">
+          <div><div class="order-id">#J7W-20260805-0141</div><div class="order-cust">City Discount Mart</div></div>
+          <span class="status-chip delivered">Delivered</span>
+          <div class="order-amt">$540.00</div>
+        </div>
+        <div class="order-row">
+          <div><div class="order-id">#J7W-20260805-0140</div><div class="order-cust">Al-Falah Gift Shop</div></div>
+          <span class="status-chip dispatch">Preparing</span>
+          <div class="order-amt">$318.00</div>
+        </div>
+        <div class="order-row">
+          <div><div class="order-id">#J7W-20260804-0139</div><div class="order-cust">Green Valley Store</div></div>
+          <span class="status-chip delivered">Delivered</span>
+          <div class="order-amt">$742.00</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Low Stock Alerts</h3>
+        <div class="low-stock-row">
+          <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.4"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.4"/></svg></div>
+          <div><div class="low-stock-name">16-Piece Dinnerware Set</div><div class="low-stock-qty">0 units left</div></div>
+        </div>
+        <div class="low-stock-row">
+          <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M8 46C8 46 12 38 20 38C24 38 24 42 30 42C36 42 38 34 46 34C52 34 56 40 56 40V50H8V46Z" stroke="#16233F" stroke-width="2.4"/></svg></div>
+          <div><div class="low-stock-name">Men's Casual Sneakers</div><div class="low-stock-qty">18 units left</div></div>
+        </div>
+        <div class="low-stock-row">
+          <div class="p-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.4"/></svg></div>
+          <div><div class="low-stock-name">Unisex Graphic Print Tee</div><div class="low-stock-qty">9 units left</div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

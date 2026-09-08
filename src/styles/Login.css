@@ -1,0 +1,70 @@
+/* Shared header/topbar/footer/base styles now live in Layout.css (imported once in App.jsx). */
+
+  .page{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+
+  /* left brand panel */
+  .brand-panel{background:var(--navy);color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+  .brand-panel .logo{display:flex;align-items:center;gap:12px;}
+
+  .brand-mid{max-width:420px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.16em;color:var(--amber);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--amber);}
+  .brand-mid h1{font-size:34px;line-height:1.15;margin:0 0 16px;}
+  .brand-mid p{font-family:'Inter',sans-serif;font-size:14.5px;line-height:1.7;color:#C9CEDA;margin:0;}
+
+  .manifest{background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.3);padding:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .manifest .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .manifest .row:last-child{border-bottom:none;}
+  .manifest .k{color:#8892A3;}
+  .manifest .v{font-weight:600;color:#fff;}
+
+  .crate-tag{position:absolute;background:#fff;color:var(--navy);border-radius:3px;padding:12px 14px;box-shadow:0 12px 28px rgba(0,0,0,0.25);font-family:'IBM Plex Mono',monospace;opacity:0.95;}
+  .crate-tag .k{font-size:9px;color:#8A8F9B;letter-spacing:0.08em;text-transform:uppercase;}
+  .crate-tag .v{font-size:13px;font-weight:600;}
+
+  /* right form panel */
+  .form-panel{background:#fff;display:flex;align-items:center;justify-content:center;padding:40px;}
+  .form-box{width:100%;max-width:400px;}
+  .form-tabs{display:flex;border:1.5px solid var(--navy);margin-bottom:32px;}
+  .form-tabs button{flex:1;background:#fff;border:none;padding:13px;font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;cursor:pointer;color:var(--navy);}
+  .form-tabs button.active{background:var(--navy);color:#fff;}
+
+  .form-box h2{font-size:24px;margin:0 0 8px;text-transform:none;letter-spacing:0;}
+  .form-sub{font-size:13.5px;color:#6E6A5F;margin:0 0 28px;}
+
+  .lgn-field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+  .lgn-field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;}
+  .lgn-field input{border:1px solid var(--line);padding:13px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;}
+  .lgn-field input:focus{border-color:var(--navy);}
+  .pass-input-wrap{position:relative;}
+  .pass-input-wrap input{width:100%;}
+  .pass-input-wrap .toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;cursor:pointer;}
+
+  .row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:13px;}
+  .remember{display:flex;align-items:center;gap:8px;color:#4A4A46;}
+  .remember input{width:15px;height:15px;accent-color:var(--navy);}
+  .forgot{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--navy);}
+  .forgot:hover{color:var(--amber-dark);}
+
+  .lgn-btn-primary{width:100%;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:15px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .lgn-btn-primary:hover{background:var(--navy-2);}
+
+  .divider{display:flex;align-items:center;gap:14px;margin:26px 0;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#A6A196;letter-spacing:0.06em;text-transform:uppercase;}
+  .divider::before, .divider::after{content:'';flex:1;height:1px;background:var(--line);}
+
+  .wholesale-note{background:var(--paper);border:1px solid var(--line);padding:16px 18px;font-size:12.5px;line-height:1.6;color:#4A4A46;}
+  .wholesale-note strong{color:var(--navy);}
+  .wholesale-note a{color:var(--amber-dark);font-weight:600;}
+
+  .signup-fields{display:none;}
+  .signup-active .signup-fields{display:block;}
+  .signup-active .login-only{display:none;}
+
+  @media(max-width:860px){
+    .page{grid-template-columns:1fr;}
+    .brand-panel{padding:36px 28px;min-height:280px;}
+    .brand-mid h1{font-size:26px;}
+    .crate-tag{display:none;}
+    .manifest{display:none;}
+    .form-panel{padding:36px 24px;}
+  }

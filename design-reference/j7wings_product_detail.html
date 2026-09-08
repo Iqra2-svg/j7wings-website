@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Crew Neck Cotton Tee — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .topbar{background:var(--navy);color:#EDEAE1;font-size:12.5px;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;letter-spacing:0.04em;}
+  header.main{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:38px;height:38px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:22px;height:22px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:0.18em;color:var(--amber-dark);text-transform:uppercase;margin-top:3px;}
+  nav.primary{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.primary a:hover{color:var(--amber-dark);}
+  .header-actions{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;}
+  .header-actions .icon-btn{display:flex;align-items:center;gap:6px;}
+  .cart-badge{background:var(--amber);color:#fff;border-radius:999px;font-size:10.5px;padding:1px 6px;font-family:'IBM Plex Mono',monospace;}
+  .search-row{display:flex;gap:0;padding:16px 0;}
+  .cat-btn{background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.04em;font-size:14px;padding:0 22px;display:flex;align-items:center;gap:10px;border:none;cursor:pointer;white-space:nowrap;}
+  .search-input-wrap{flex:1;display:flex;border:1.5px solid var(--navy);border-left:none;}
+  .search-input-wrap input{flex:1;border:none;padding:0 16px;font-family:'Inter',sans-serif;font-size:14px;outline:none;background:#fff;}
+  .search-input-wrap button{background:var(--amber);border:none;padding:0 20px;cursor:pointer;}
+
+  .breadcrumb{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#8A8577;}
+  .breadcrumb a:hover{color:var(--amber-dark);}
+  .breadcrumb .sep{margin:0 8px;color:#C8C3B6;}
+  .breadcrumb .current{color:var(--navy);font-weight:600;}
+
+  /* product layout */
+  .product-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;padding:44px 0 30px;}
+
+  /* gallery */
+  .gallery-main{background:#fff;border:1px solid var(--line);height:420px;display:flex;align-items:center;justify-content:center;position:relative;}
+  .gallery-main .stamp{position:absolute;top:16px;left:16px;background:var(--stamp);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.06em;padding:5px 10px;transform:rotate(-4deg);border-radius:2px;}
+  .gallery-main svg{width:140px;height:140px;opacity:0.85;}
+  .thumb-row{display:flex;gap:12px;margin-top:14px;}
+  .thumb-row .thumb{width:78px;height:78px;background:#fff;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .thumb-row .thumb.active{border-color:var(--navy);}
+  .thumb-row .thumb svg{width:34px;height:34px;opacity:0.8;}
+
+  /* info panel */
+  .p-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber-dark);letter-spacing:0.1em;margin-bottom:10px;}
+  .info-panel h1{font-size:26px;line-height:1.25;margin:0 0 14px;text-transform:none;letter-spacing:0;}
+  .in-stock-badge{display:inline-flex;align-items:center;gap:6px;background:#E7F1EA;color:var(--stamp);font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:2px;margin-bottom:18px;}
+  .in-stock-badge::before{content:'';width:6px;height:6px;background:var(--stamp);border-radius:50%;}
+
+  .price-block{display:flex;align-items:baseline;gap:12px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:22px;}
+  .price-block .price{font-family:'IBM Plex Mono',monospace;font-size:32px;font-weight:600;color:var(--navy);}
+  .price-block .unit{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8A8577;}
+
+  .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:24px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+  .spec-grid .cell{padding:11px 0;border-bottom:1px solid var(--line);}
+  .spec-grid .k{color:#8A8577;letter-spacing:0.05em;text-transform:uppercase;font-size:10.5px;margin-bottom:3px;}
+  .spec-grid .v{color:var(--navy);font-weight:600;}
+
+  .qty-row{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+  .qty-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#8A8577;letter-spacing:0.05em;text-transform:uppercase;}
+  .qty-stepper{display:flex;border:1.5px solid var(--navy);}
+  .qty-stepper button{width:38px;height:42px;background:#fff;border:none;font-size:16px;cursor:pointer;font-family:'Inter',sans-serif;}
+  .qty-stepper button:hover{background:var(--paper);}
+  .qty-stepper input{width:52px;border:none;border-left:1.5px solid var(--navy);border-right:1.5px solid var(--navy);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:14px;outline:none;}
+  .qty-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#A6A196;}
+
+  .cta-row{display:flex;gap:12px;margin-bottom:26px;}
+  .btn-primary{flex:1;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:16px 20px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .btn-primary:hover{background:var(--navy-2);}
+  .btn-icon{width:52px;background:#fff;border:1.5px solid var(--line);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .btn-icon:hover{border-color:var(--navy);}
+
+  .manifest{background:#fff;border:1px dashed var(--navy);padding:18px 20px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .manifest .row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);}
+  .manifest .row:last-child{border-bottom:none;}
+  .manifest .k{color:#8A8577;}
+  .manifest .v{font-weight:600;color:var(--navy);}
+
+  /* description tabs */
+  .desc-section{padding:20px 0 60px;border-top:2px solid var(--navy);margin-top:20px;}
+  .desc-tabs{display:flex;gap:0;margin-bottom:24px;}
+  .desc-tabs button{background:none;border:none;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.03em;font-size:14px;text-transform:uppercase;padding:16px 26px;cursor:pointer;color:#8A8577;border-bottom:3px solid transparent;}
+  .desc-tabs button.active{color:var(--navy);border-bottom-color:var(--amber);}
+  .desc-body{font-size:14.5px;line-height:1.75;color:#4A4A46;max-width:760px;}
+  .desc-body ul{padding-left:20px;}
+  .desc-body li{margin-bottom:6px;}
+
+  /* related */
+  .related{padding:0 0 70px;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:26px;border-bottom:2px solid var(--navy);padding-bottom:14px;}
+  .section-head h2{font-size:22px;margin:0;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-dark);letter-spacing:0.1em;}
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .prod-card{background:#fff;border:1px solid var(--line);position:relative;}
+  .prod-card .stamp{position:absolute;top:12px;left:12px;background:var(--stamp);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;padding:4px 8px;transform:rotate(-4deg);border-radius:2px;z-index:2;}
+  .prod-card .thumb{height:150px;background:#F6F4EF;display:flex;align-items:center;justify-content:center;border-bottom:1px dashed var(--line);}
+  .prod-card .thumb svg{width:44px;height:44px;opacity:0.85;}
+  .prod-card .info{padding:16px;}
+  .prod-card .price{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .prod-card .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;display:flex;gap:10px;margin-bottom:10px;}
+  .prod-card .name{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:12px;min-height:34px;}
+  .prod-card .add{width:100%;background:var(--navy);color:#fff;border:none;padding:9px;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;}
+  .prod-card .add:hover{background:var(--amber-dark);}
+
+  footer{background:#101B30;color:#AEB4C2;padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:900px){
+    nav.primary{display:none;}
+    .product-layout{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+    <span><a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a></span>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="j7wings_homepage.html" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#D98E2B"/>
+          </svg>
+        </div>
+        <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+      </a>
+      <nav class="primary">
+        <a href="#">New Arrivals</a>
+        <a href="#">Specials</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#" class="icon-btn">Sign In</a>
+        <a href="#" class="icon-btn">Cart <span class="cart-badge">0</span></a>
+      </div>
+    </div>
+    <div class="search-row">
+      <button class="cat-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        ALL CATEGORIES
+      </button>
+      <div class="search-input-wrap">
+        <input type="text" placeholder="Search by item name, SKU, or category&hellip;">
+        <button><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 21L15.5 15.5M17.5 10.5C17.5 14.09 14.59 17 11 17C7.41 17 4.5 14.09 4.5 10.5C4.5 6.91 7.41 4 11 4C14.59 4 17.5 6.91 17.5 10.5Z" stroke="#16233F" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="wrap">
+    <a href="j7wings_homepage.html">Home</a><span class="sep">/</span>
+    <a href="j7wings_listing.html">T-Shirts</a><span class="sep">/</span>
+    <a href="j7wings_listing.html">Men's T-Shirts</a><span class="sep">/</span>
+    <span class="current">Item #10001</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="product-layout">
+    <div>
+      <div class="gallery-main">
+        <div class="stamp">IN STOCK</div>
+        <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2"/><path d="M14 16L8 20L14 26" stroke="#16233F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 16L56 20L50 26" stroke="#16233F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="thumb-row">
+        <div class="thumb active"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#8A8577" stroke-width="2"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#8A8577" stroke-width="2"/></svg></div>
+        <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#8A8577" stroke-width="2"/></svg></div>
+      </div>
+    </div>
+
+    <div class="info-panel">
+      <div class="p-eyebrow">// CAT-01 &middot; MEN'S T-SHIRTS</div>
+      <h1>Men's Crew Neck Cotton T-Shirt, Assorted Colors</h1>
+      <div class="in-stock-badge">In Stock &middot; 336 Units Available</div>
+
+      <div class="price-block">
+        <span class="price">$3.50</span>
+        <span class="unit">/ each &middot; sold per case</span>
+      </div>
+
+      <div class="spec-grid">
+        <div class="cell"><div class="k">Item #</div><div class="v">10001</div></div>
+        <div class="cell"><div class="k">Case Pack (CP)</div><div class="v">12 units</div></div>
+        <div class="cell"><div class="k">Material</div><div class="v">100% Cotton</div></div>
+        <div class="cell"><div class="k">Country of Origin</div><div class="v">Pakistan</div></div>
+      </div>
+
+      <div class="qty-row">
+        <span class="qty-label">Quantity (cases)</span>
+        <div class="qty-stepper">
+          <button>&minus;</button>
+          <input type="text" value="1">
+          <button>+</button>
+        </div>
+        <span class="qty-note">= 12 units</span>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn-primary">Add to Cart &middot; $42.00</button>
+        <button class="btn-icon">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M20.8 4.6C19.6 3.4 17.7 3.4 16.5 4.6L12 9.1L7.5 4.6C6.3 3.4 4.4 3.4 3.2 4.6C2 5.8 2 7.7 3.2 8.9L12 17.7L20.8 8.9C22 7.7 22 5.8 20.8 4.6Z" stroke="#16233F" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="manifest">
+        <div class="row"><span class="k">SOLD BY</span><span class="v">CASE (12 UNITS)</span></div>
+        <div class="row"><span class="k">FREIGHT</span><span class="v">FREE OVER $500</span></div>
+        <div class="row"><span class="k">DISPATCH</span><span class="v">WITHIN 48HRS</span></div>
+        <div class="row"><span class="k">RETURNS</span><span class="v">14-DAY DEFECT POLICY</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="desc-section">
+    <div class="desc-tabs">
+      <button class="active">Description</button>
+      <button>Shipping</button>
+      <button>Case Pack Info</button>
+    </div>
+    <div class="desc-body">
+      <p>A wardrobe staple built for retail turnover. This crew neck cotton tee ships in an assorted color case pack &mdash; ideal for dollar stores, discount retailers, and general merchandise shops stocking everyday basics.</p>
+      <ul>
+        <li>100% combed cotton, pre-shrunk</li>
+        <li>Reinforced collar and shoulder seams</li>
+        <li>Assorted colors per case: navy, grey, black, white</li>
+        <li>Sizes S&ndash;XL, mixed per case pack</li>
+        <li>Machine washable</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrap related">
+  <div class="section-head">
+    <div>
+      <div class="tag">// YOU MAY ALSO STOCK</div>
+      <h2>Related Items</h2>
+    </div>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card">
+      <div class="stamp">IN STOCK</div>
+      <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="info">
+        <div class="price">$3.75</div>
+        <div class="meta"><span>CP: 12</span><span>#10002</span></div>
+        <div class="name">Men's V-Neck T-Shirt, Black</div>
+        <button class="add">Add to Cart</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="stamp">IN STOCK</div>
+      <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="info">
+        <div class="price">$3.25</div>
+        <div class="meta"><span>CP: 24</span><span>#10008</span></div>
+        <div class="name">Unisex Basic Crew Tee, Bulk Pack</div>
+        <button class="add">Add to Cart</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="stamp sale">SALE</div>
+      <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="info">
+        <div class="price">$4.25</div>
+        <div class="meta"><span>CP: 12</span><span>#10007</span></div>
+        <div class="name">Unisex Graphic Print Tee, Assorted</div>
+        <button class="add">Add to Cart</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="stamp">IN STOCK</div>
+      <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="info">
+        <div class="price">$2.75</div>
+        <div class="meta"><span>CP: 24</span><span>#10005</span></div>
+        <div class="name">Kids Cotton T-Shirt, Assorted Sizes</div>
+        <button class="add">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+    <span class="mono" style="font-size:11.5px;color:#6E7688;">CATALOG SYNCED &middot; WEEKLY</span>
+  </div>
+</footer>
+
+</body>
+</html>

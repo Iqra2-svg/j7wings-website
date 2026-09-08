@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+    --danger:#B5361C;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .topbar{background:var(--navy);color:#EDEAE1;font-size:12.5px;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;letter-spacing:0.04em;}
+  header.main{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:38px;height:38px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:22px;height:22px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:0.18em;color:var(--amber-dark);text-transform:uppercase;margin-top:3px;}
+  nav.primary{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.primary a:hover{color:var(--amber-dark);}
+  .header-actions{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;}
+  .cart-badge{background:var(--amber);color:#fff;border-radius:999px;font-size:10.5px;padding:1px 6px;font-family:'IBM Plex Mono',monospace;}
+
+  .breadcrumb{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#8A8577;}
+  .breadcrumb a:hover{color:var(--amber-dark);}
+  .breadcrumb .sep{margin:0 8px;color:#C8C3B6;}
+  .breadcrumb .current{color:var(--navy);font-weight:600;}
+
+  .page-head{padding:34px 0 22px;border-bottom:2px solid var(--navy);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;}
+  .page-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber-dark);letter-spacing:0.1em;margin-bottom:8px;}
+  .page-head h1{font-size:28px;margin:0;}
+  .item-count{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#6E6A5F;}
+
+  /* progress steps */
+  .steps{display:flex;gap:0;padding:22px 0 6px;}
+  .step{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#A6A196;}
+  .step .dot{width:24px;height:24px;border-radius:50%;border:1.5px solid #C8C3B6;display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .step.active{color:var(--navy);font-weight:600;}
+  .step.active .dot{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .step-line{width:50px;height:1px;background:var(--line);margin:0 14px;align-self:center;}
+
+  .cart-layout{display:grid;grid-template-columns:1fr 340px;gap:30px;padding:26px 0 70px;align-items:start;}
+
+  /* cart table */
+  .cart-table{background:#fff;border:1px solid var(--line);}
+  .cart-header-row{display:grid;grid-template-columns:90px 1fr 130px 130px 110px 40px;gap:14px;padding:14px 20px;background:var(--paper);border-bottom:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8577;}
+  .cart-item{display:grid;grid-template-columns:90px 1fr 130px 130px 110px 40px;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center;}
+  .cart-item:last-child{border-bottom:none;}
+  .item-thumb{width:70px;height:70px;background:#F6F4EF;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .item-thumb svg{width:34px;height:34px;opacity:0.85;}
+  .item-name{font-size:13.5px;font-weight:600;line-height:1.4;margin-bottom:4px;}
+  .item-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;display:flex;gap:10px;}
+  .qty-stepper{display:flex;border:1.5px solid var(--navy);width:fit-content;}
+  .qty-stepper button{width:30px;height:34px;background:#fff;border:none;font-size:14px;cursor:pointer;}
+  .qty-stepper button:hover{background:var(--paper);}
+  .qty-stepper input{width:38px;border:none;border-left:1.5px solid var(--navy);border-right:1.5px solid var(--navy);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;}
+  .item-price{font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:600;color:var(--navy);}
+  .item-total{font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:600;color:var(--navy);}
+  .remove-btn{width:30px;height:30px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .remove-btn:hover{border-color:var(--danger);}
+  .remove-btn:hover svg path{stroke:var(--danger);}
+
+  .cart-footer-row{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;}
+  .continue-link{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px;}
+  .continue-link:hover{color:var(--amber-dark);}
+
+  /* summary */
+  .summary{background:#fff;border:1px dashed var(--navy);padding:24px;position:sticky;top:100px;}
+  .summary h3{font-size:16px;margin:0 0 18px;}
+  .summary-row{display:flex;justify-content:space-between;padding:9px 0;font-family:'IBM Plex Mono',monospace;font-size:13px;border-bottom:1px solid var(--line);}
+  .summary-row .k{color:#6E6A5F;}
+  .summary-row .v{font-weight:600;color:var(--navy);}
+  .summary-row.total{border-bottom:none;border-top:2px solid var(--navy);margin-top:6px;padding-top:16px;}
+  .summary-row.total .v{font-size:20px;}
+  .promo-row{display:flex;gap:0;margin:16px 0;}
+  .promo-row input{flex:1;border:1px solid var(--line);padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;outline:none;}
+  .promo-row button{background:var(--paper);border:1px solid var(--line);border-left:none;padding:0 16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;cursor:pointer;}
+  .btn-checkout{width:100%;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:16px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;margin-top:6px;}
+  .btn-checkout:hover{background:var(--navy-2);}
+  .min-order-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-dark);text-align:center;margin-top:12px;padding:10px;background:#FBF2E3;border:1px solid #EAD3A6;}
+
+  footer{background:#101B30;color:#AEB4C2;padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:900px){
+    nav.primary{display:none;}
+    .cart-layout{grid-template-columns:1fr;}
+    .cart-header-row{display:none;}
+    .cart-item{grid-template-columns:70px 1fr;grid-template-areas:"thumb name" "thumb meta" "qty price" "remove remove";row-gap:8px;}
+    .summary{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+    <span><a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a></span>
+  </div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="j7wings_homepage.html" class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#D98E2B"/>
+          </svg>
+        </div>
+        <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+      </a>
+      <nav class="primary">
+        <a href="#">New Arrivals</a>
+        <a href="#">Specials</a>
+        <a href="#">Best Sellers</a>
+        <a href="#">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#">Sign In</a>
+        <a href="#">Cart <span class="cart-badge">3</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="wrap">
+    <a href="j7wings_homepage.html">Home</a><span class="sep">/</span>
+    <span class="current">Cart</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-head">
+    <div>
+      <div class="tag">// REVIEW YOUR ORDER</div>
+      <h1>Your Cart</h1>
+    </div>
+    <div class="item-count">3 ITEMS &middot; 3 CASES</div>
+  </div>
+
+  <div class="steps">
+    <div class="step active"><div class="dot">1</div> CART</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="dot">2</div> CHECKOUT</div>
+    <div class="step-line"></div>
+    <div class="step"><div class="dot">3</div> CONFIRMATION</div>
+  </div>
+
+  <div class="cart-layout">
+    <div>
+      <div class="cart-table">
+        <div class="cart-header-row">
+          <span></span><span>Item</span><span>Price</span><span>Quantity</span><span>Total</span><span></span>
+        </div>
+
+        <div class="cart-item">
+          <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div>
+            <div class="item-name">Men's Crew Neck Cotton Tee, Assorted</div>
+            <div class="item-meta"><span>CP: 12</span><span>#10001</span></div>
+          </div>
+          <div class="item-price">$3.50<span style="color:#A6A196;font-size:10.5px;"> /ea</span></div>
+          <div class="qty-stepper">
+            <button>&minus;</button>
+            <input type="text" value="1">
+            <button>+</button>
+          </div>
+          <div class="item-total">$42.00</div>
+          <button class="remove-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+
+        <div class="cart-item">
+          <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M8 46C8 46 12 38 20 38C24 38 24 42 30 42C36 42 38 34 46 34C52 34 56 40 56 40V50H8V46Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div>
+            <div class="item-name">Men's Casual Sneakers, Assorted Sizes</div>
+            <div class="item-meta"><span>CP: 6</span><span>#20001</span></div>
+          </div>
+          <div class="item-price">$12.50<span style="color:#A6A196;font-size:10.5px;"> /ea</span></div>
+          <div class="qty-stepper">
+            <button>&minus;</button>
+            <input type="text" value="1">
+            <button>+</button>
+          </div>
+          <div class="item-total">$75.00</div>
+          <button class="remove-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+
+        <div class="cart-item">
+          <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.2"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div>
+            <div class="item-name">16-Piece Dinnerware Set, White</div>
+            <div class="item-meta"><span>CP: 2</span><span>#30003</span></div>
+          </div>
+          <div class="item-price">$22.00<span style="color:#A6A196;font-size:10.5px;"> /ea</span></div>
+          <div class="qty-stepper">
+            <button>&minus;</button>
+            <input type="text" value="1">
+            <button>+</button>
+          </div>
+          <div class="item-total">$44.00</div>
+          <button class="remove-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6H21M8 6V4C8 3 9 2 10 2H14C15 2 16 3 16 4V6M19 6V20C19 21 18 22 17 22H7C6 22 5 21 5 20V6H19Z" stroke="#8A8577" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+
+        <div class="cart-footer-row">
+          <a href="j7wings_listing.html" class="continue-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="#16233F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span class="k">Subtotal (3 cases, 20 units)</span><span class="v">$161.00</span></div>
+      <div class="summary-row"><span class="k">Estimated Freight</span><span class="v">FREE</span></div>
+      <div class="summary-row"><span class="k">Est. Tax</span><span class="v">$0.00</span></div>
+
+      <div class="promo-row">
+        <input type="text" placeholder="Promo code">
+        <button>Apply</button>
+      </div>
+
+      <div class="summary-row total"><span class="k">Total</span><span class="v">$161.00</span></div>
+
+      <button class="btn-checkout">Proceed to Checkout</button>
+      <div class="min-order-note">Add $339.00 more to reach the $500 wholesale order minimum</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+    <span class="mono" style="font-size:11.5px;color:#6E7688;">CATALOG SYNCED &middot; WEEKLY</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search Results — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .topbar{background:var(--navy);color:#EDEAE1;font-size:12.5px;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;letter-spacing:0.04em;}
+  header.main{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:38px;height:38px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:22px;height:22px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:0.18em;color:var(--amber-dark);text-transform:uppercase;margin-top:3px;}
+  nav.primary{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.primary a:hover{color:var(--amber-dark);}
+  .header-actions{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;}
+  .cart-badge{background:var(--amber);color:#fff;border-radius:999px;font-size:10.5px;padding:1px 6px;font-family:'IBM Plex Mono',monospace;}
+  .search-row{display:flex;gap:0;padding:16px 0;}
+  .cat-btn{background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:0.04em;font-size:14px;padding:0 22px;display:flex;align-items:center;gap:10px;border:none;cursor:pointer;white-space:nowrap;}
+  .search-input-wrap{flex:1;display:flex;border:1.5px solid var(--navy);border-left:none;}
+  .search-input-wrap input{flex:1;border:none;padding:0 16px;font-family:'Inter',sans-serif;font-size:14px;outline:none;background:#fff;}
+  .search-input-wrap button{background:var(--amber);border:none;padding:0 20px;cursor:pointer;}
+
+  .breadcrumb{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#8A8577;}
+  .breadcrumb .sep{margin:0 8px;color:#C8C3B6;}
+  .breadcrumb .current{color:var(--navy);font-weight:600;}
+
+  .page-head{padding:32px 0 24px;border-bottom:2px solid var(--navy);}
+  .page-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber-dark);letter-spacing:0.1em;margin-bottom:8px;}
+  .page-head h1{font-size:26px;margin:0 0 6px;text-transform:none;letter-spacing:0;}
+  .page-head h1 em{font-style:normal;color:var(--amber-dark);}
+  .page-head .count{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6E6A5F;}
+
+  /* category pills across results */
+  .pill-row{display:flex;gap:10px;padding:18px 0;flex-wrap:wrap;}
+  .pill{background:#fff;border:1px solid var(--line);padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px;cursor:pointer;}
+  .pill.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .pill .n{color:#8A8577;font-weight:400;}
+  .pill.active .n{color:#B7BDCB;}
+
+  .listing-layout{display:grid;grid-template-columns:250px 1fr;gap:30px;padding:6px 0 70px;align-items:start;}
+
+  .sidebar{background:#fff;border:1px solid var(--line);}
+  .filter-block{padding:18px 20px;border-bottom:1px solid var(--line);}
+  .filter-block:last-child{border-bottom:none;}
+  .filter-block h4{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin:0 0 12px;}
+  .check-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;font-size:13px;}
+  .check-row .left{display:flex;align-items:center;gap:8px;}
+  .check-row input{width:14px;height:14px;accent-color:var(--navy);}
+  .check-row .count{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#A6A196;}
+  .price-inputs{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .price-inputs input{width:100%;border:1px solid var(--line);padding:8px 9px;font-family:'IBM Plex Mono',monospace;font-size:12px;outline:none;}
+  .btn-go{width:100%;background:var(--navy);color:#fff;border:none;padding:9px;font-family:'Oswald',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;}
+
+  .toolbar{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);padding:13px 18px;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+  .toolbar .showing{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#6E6A5F;}
+  .toolbar select{border:1px solid var(--line);background:#fff;padding:7px 10px;font-family:'Inter',sans-serif;font-size:13px;}
+  .toolbar label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;letter-spacing:0.05em;margin-right:6px;text-transform:uppercase;}
+
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .prod-card{background:#fff;border:1px solid var(--line);position:relative;}
+  .prod-card .stamp{position:absolute;top:12px;left:12px;background:var(--stamp);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;padding:4px 8px;transform:rotate(-4deg);border-radius:2px;z-index:2;}
+  .prod-card .stamp.sale{background:#B5361C;}
+  .prod-card .cat-chip{position:absolute;top:12px;right:12px;background:#fff;border:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#8A8577;padding:3px 8px;z-index:2;text-transform:uppercase;letter-spacing:0.05em;}
+  .prod-card .thumb{height:170px;background:#F6F4EF;display:flex;align-items:center;justify-content:center;border-bottom:1px dashed var(--line);}
+  .prod-card .thumb svg{width:50px;height:50px;opacity:0.85;}
+  .prod-card .info{padding:16px;}
+  .prod-card .price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;}
+  .prod-card .price{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;color:var(--navy);}
+  .prod-card .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;display:flex;gap:10px;margin-bottom:10px;}
+  .prod-card .name{font-size:13.5px;font-weight:600;line-height:1.35;margin-bottom:12px;min-height:36px;}
+  .prod-card .name mark{background:#FBE7C2;color:inherit;padding:0 1px;}
+  .prod-card .add{width:100%;background:var(--navy);color:#fff;border:none;padding:10px;font-family:'Oswald',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;}
+  .prod-card .add:hover{background:var(--amber-dark);}
+
+  /* no results state */
+  .no-results{background:#fff;border:1px dashed var(--navy);padding:60px 30px;text-align:center;}
+  .no-results svg{width:52px;height:52px;margin-bottom:18px;opacity:0.5;}
+  .no-results h3{font-size:18px;margin:0 0 10px;}
+  .no-results p{font-size:13.5px;color:#6E6A5F;max-width:380px;margin:0 auto 20px;}
+  .no-results .sugg{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy);}
+  .no-results .sugg a{color:var(--amber-dark);font-weight:600;}
+
+  footer{background:#101B30;color:#AEB4C2;padding:40px 0;margin-top:20px;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:900px){
+    nav.primary{display:none;}
+    .listing-layout{grid-template-columns:1fr;}
+    .prod-grid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap"><span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span><span><a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a></span></div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="j7wings_homepage.html" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#D98E2B"/></svg></div>
+        <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+      </a>
+      <nav class="primary">
+        <a href="#">New Arrivals</a><a href="#">Specials</a><a href="#">Best Sellers</a><a href="#">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#">Sign In</a>
+        <a href="#">Cart <span class="cart-badge">0</span></a>
+      </div>
+    </div>
+    <div class="search-row">
+      <button class="cat-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 6H20M4 12H20M4 18H14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        ALL CATEGORIES
+      </button>
+      <div class="search-input-wrap">
+        <input type="text" value="cotton tee">
+        <button><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 21L15.5 15.5M17.5 10.5C17.5 14.09 14.59 17 11 17C7.41 17 4.5 14.09 4.5 10.5C4.5 6.91 7.41 4 11 4C14.59 4 17.5 6.91 17.5 10.5Z" stroke="#16233F" stroke-width="2" stroke-linecap="round"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="wrap"><a href="j7wings_homepage.html">Home</a><span class="sep">/</span><span class="current">Search Results</span></div>
+</div>
+
+<div class="wrap">
+  <div class="page-head">
+    <div class="tag">// SEARCH RESULTS</div>
+    <h1>Results for &ldquo;<em>cotton tee</em>&rdquo;</h1>
+    <div class="count">7 items found across 2 categories</div>
+  </div>
+
+  <div class="pill-row">
+    <div class="pill active">All Results <span class="n">(7)</span></div>
+    <div class="pill">T-Shirts <span class="n">(6)</span></div>
+    <div class="pill">Crockery <span class="n">(1)</span></div>
+  </div>
+
+  <div class="listing-layout">
+    <aside class="sidebar">
+      <div class="filter-block">
+        <h4>Refine Results</h4>
+        <div class="check-row"><span class="left"><input type="checkbox"> In Stock Only</span><span class="count">6</span></div>
+        <div class="check-row"><span class="left"><input type="checkbox"> On Sale</span><span class="count">2</span></div>
+      </div>
+      <div class="filter-block">
+        <h4>Category</h4>
+        <div class="check-row"><span class="left"><input type="checkbox" checked> T-Shirts</span><span class="count">6</span></div>
+        <div class="check-row"><span class="left"><input type="checkbox" checked> Crockery</span><span class="count">1</span></div>
+        <div class="check-row"><span class="left"><input type="checkbox"> Shoes</span><span class="count">0</span></div>
+      </div>
+      <div class="filter-block">
+        <h4>Price</h4>
+        <div class="price-inputs"><input type="text" placeholder="Min"><span>&ndash;</span><input type="text" placeholder="Max"></div>
+        <button class="btn-go">Go</button>
+      </div>
+    </aside>
+
+    <div>
+      <div class="toolbar">
+        <div class="showing">SHOWING 1&ndash;7 OF 7</div>
+        <div><label>Sort</label><select><option>Relevance</option><option>Price: Low to High</option><option>Price: High to Low</option></select></div>
+      </div>
+
+      <div class="prod-grid">
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$3.50</span></div>
+            <div class="meta"><span>CP: 12</span><span>#10001</span></div>
+            <div class="name">Men's Crew Neck <mark>Cotton</mark> <mark>Tee</mark>, Asst.</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$3.90</span></div>
+            <div class="meta"><span>CP: 12</span><span>#10003</span></div>
+            <div class="name">Women's Fitted <mark>Tee</mark>, Assorted Colors</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$2.75</span></div>
+            <div class="meta"><span>CP: 24</span><span>#10005</span></div>
+            <div class="name">Kids <mark>Cotton</mark> <mark>T-Shirt</mark>, Assorted Sizes</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp sale">SALE</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$4.25</span></div>
+            <div class="meta"><span>CP: 12</span><span>#10007</span></div>
+            <div class="name">Unisex Graphic Print <mark>Tee</mark>, Assorted</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$3.25</span></div>
+            <div class="meta"><span>CP: 24</span><span>#10008</span></div>
+            <div class="name">Unisex Basic Crew <mark>Tee</mark>, Bulk Pack</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">T-Shirts</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$3.00</span></div>
+            <div class="meta"><span>CP: 24</span><span>#10006</span></div>
+            <div class="name">Kids Graphic Print <mark>Tee</mark>, Assorted</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="prod-card">
+          <div class="stamp">IN STOCK</div>
+          <div class="cat-chip">Crockery</div>
+          <div class="thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.2"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.2"/></svg></div>
+          <div class="info">
+            <div class="price-row"><span class="price">$1.95</span></div>
+            <div class="meta"><span>CP: 36</span><span>#40003</span></div>
+            <div class="name">Printed Ceramic Mug, <mark>Tee</mark>-Party Design</div>
+            <button class="add">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state reference (hidden by default) -->
+      <!--
+      <div class="no-results">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 21L15.5 15.5M17.5 10.5C17.5 14.09 14.59 17 11 17C7.41 17 4.5 14.09 4.5 10.5C4.5 6.91 7.41 4 11 4C14.59 4 17.5 6.91 17.5 10.5Z" stroke="#16233F" stroke-width="1.6"/></svg>
+        <h3>No results found</h3>
+        <p>We couldn't find any products matching your search. Try a different keyword or browse by category.</p>
+        <div class="sugg">Try: <a href="#">T-Shirts</a> &middot; <a href="#">Shoes</a> &middot; <a href="#">Crockery</a></div>
+      </div>
+      -->
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+    <span class="mono" style="font-size:11.5px;color:#6E7688;">CATALOG SYNCED &middot; WEEKLY</span>
+  </div>
+</footer>
+
+</body>
+</html>

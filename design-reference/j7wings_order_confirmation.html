@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px;}
+
+  .topbar{background:var(--navy);color:#EDEAE1;font-size:12.5px;}
+  .topbar .wrap{max-width:1240px;display:flex;justify-content:space-between;align-items:center;padding:8px 24px;letter-spacing:0.04em;}
+  header.main{background:#fff;border-bottom:1px solid var(--line);}
+  .header-row{max-width:1240px;margin:0 auto;display:flex;align-items:center;padding:18px 24px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:38px;height:38px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:22px;height:22px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:0.18em;color:var(--amber-dark);text-transform:uppercase;margin-top:3px;}
+
+  .steps{display:flex;gap:0;padding:28px 0 8px;justify-content:center;max-width:1240px;margin:0 auto;}
+  .step{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--stamp);font-weight:600;}
+  .step .dot{width:24px;height:24px;border-radius:50%;background:var(--stamp);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .step-line{width:50px;height:1px;background:var(--stamp);margin:0 14px;align-self:center;}
+
+  .confirm-hero{text-align:center;padding:40px 0 30px;}
+  .stamp-circle{width:76px;height:76px;border:2.5px solid var(--stamp);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transform:rotate(-4deg);}
+  .stamp-circle svg{width:36px;height:36px;}
+  .confirm-hero h1{font-size:30px;margin:0 0 10px;}
+  .confirm-hero p{font-size:14.5px;color:#5A5A54;margin:0 0 6px;}
+  .order-number{display:inline-block;background:#fff;border:1px dashed var(--navy);padding:10px 20px;font-family:'IBM Plex Mono',monospace;font-size:14px;font-weight:600;color:var(--navy);margin-top:14px;letter-spacing:0.04em;}
+
+  .card{background:#fff;border:1px solid var(--line);padding:26px;margin-bottom:20px;}
+  .card h3{font-size:14.5px;margin:0 0 18px;display:flex;align-items:center;gap:10px;justify-content:space-between;}
+  .card h3 .tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber-dark);letter-spacing:0.08em;text-transform:none;font-weight:600;}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .info-block .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;margin-bottom:6px;}
+  .info-block .v{font-size:13.5px;line-height:1.6;color:var(--ink);}
+  .info-block .v.mono{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--navy);font-weight:600;}
+
+  .order-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center;}
+  .order-item:last-child{border-bottom:none;}
+  .item-thumb{width:56px;height:56px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .item-thumb svg{width:28px;height:28px;opacity:0.85;}
+  .item-info{flex:1;}
+  .item-name{font-size:13.5px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+  .item-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;}
+  .item-price{font-family:'IBM Plex Mono',monospace;font-size:13.5px;font-weight:600;color:var(--navy);}
+
+  .totals{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);}
+  .total-row{display:flex;justify-content:space-between;padding:6px 0;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  .total-row .k{color:#6E6A5F;}
+  .total-row .v{font-weight:600;color:var(--navy);}
+  .total-row.grand{border-top:2px solid var(--navy);margin-top:8px;padding-top:12px;}
+  .total-row.grand .v{font-size:18px;}
+
+  .tracker{display:flex;justify-content:space-between;position:relative;margin:10px 0 4px;}
+  .tracker::before{content:'';position:absolute;top:11px;left:22px;right:22px;height:2px;background:var(--line);}
+  .t-step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative;z-index:1;}
+  .t-dot{width:24px;height:24px;border-radius:50%;background:#fff;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .t-step.done .t-dot{background:var(--stamp);border-color:var(--stamp);color:#fff;}
+  .t-step.current .t-dot{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .t-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.04em;text-transform:uppercase;color:#8A8577;text-align:center;}
+  .t-step.done .t-label, .t-step.current .t-label{color:var(--navy);font-weight:600;}
+
+  .action-row{display:flex;gap:12px;margin:8px 0 50px;}
+  .btn-primary{flex:1;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:16px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .btn-primary:hover{background:var(--navy-2);}
+  .btn-outline{flex:1;background:#fff;border:1.5px solid var(--navy);color:var(--navy);font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:16px;cursor:pointer;font-size:14px;text-transform:uppercase;}
+  .btn-outline:hover{background:var(--paper);}
+
+  footer{background:#101B30;color:#AEB4C2;padding:40px 0;}
+  footer .wrap{max-width:1240px;display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:700px){
+    .info-grid{grid-template-columns:1fr;}
+    .action-row{flex-direction:column;}
+    .steps{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap"><span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span><span>Need help? +92 300 000 0000</span></div>
+</div>
+
+<header class="main">
+  <div class="header-row">
+    <a href="j7wings_homepage.html" class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#D98E2B"/></svg>
+      </div>
+      <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+    </a>
+  </div>
+</header>
+
+<div class="steps">
+  <div class="step"><div class="dot">&check;</div> CART</div>
+  <div class="step-line"></div>
+  <div class="step"><div class="dot">&check;</div> CHECKOUT</div>
+  <div class="step-line"></div>
+  <div class="step"><div class="dot">&check;</div> CONFIRMATION</div>
+</div>
+
+<div class="wrap">
+  <div class="confirm-hero">
+    <div class="stamp-circle">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M5 13L9 17L19 7" stroke="#2E6B4F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1>Order Confirmed</h1>
+    <p>Thank you &mdash; your wholesale order has been received and is being processed.</p>
+    <p>A confirmation has been sent to <strong>sunrise.store@email.com</strong></p>
+    <div class="order-number">ORDER #J7W-20260805-0142</div>
+  </div>
+
+  <div class="card">
+    <h3>Fulfillment Status <span class="tag">EST. DISPATCH: 48HRS</span></h3>
+    <div class="tracker">
+      <div class="t-step done"><div class="t-dot">&check;</div><div class="t-label">Order Placed</div></div>
+      <div class="t-step current"><div class="t-dot">2</div><div class="t-label">Processing</div></div>
+      <div class="t-step"><div class="t-dot">3</div><div class="t-label">Dispatched</div></div>
+      <div class="t-step"><div class="t-dot">4</div><div class="t-label">Delivered</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Order Details</h3>
+    <div class="info-grid">
+      <div class="info-block">
+        <div class="k">Order Date</div>
+        <div class="v">August 5, 2026</div>
+      </div>
+      <div class="info-block">
+        <div class="k">Payment Method</div>
+        <div class="v mono">VISA &middot;&middot;&middot;&middot; 4242</div>
+      </div>
+      <div class="info-block">
+        <div class="k">Shipping Address</div>
+        <div class="v">Sunrise General Store<br>House 12, Street 4, Satellite Town<br>Rawalpindi, Punjab 46000</div>
+      </div>
+      <div class="info-block">
+        <div class="k">Shipping Method</div>
+        <div class="v">Standard Freight &middot; 3&ndash;5 business days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Items Ordered</h3>
+    <div class="order-item">
+      <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="item-info">
+        <div class="item-name">Men's Crew Neck Cotton Tee, Assorted</div>
+        <div class="item-meta">CP: 12 &middot; #10001 &middot; Qty: 1 case</div>
+      </div>
+      <div class="item-price">$42.00</div>
+    </div>
+    <div class="order-item">
+      <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><path d="M8 46C8 46 12 38 20 38C24 38 24 42 30 42C36 42 38 34 46 34C52 34 56 40 56 40V50H8V46Z" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="item-info">
+        <div class="item-name">Men's Casual Sneakers, Assorted Sizes</div>
+        <div class="item-meta">CP: 6 &middot; #20001 &middot; Qty: 1 case</div>
+      </div>
+      <div class="item-price">$75.00</div>
+    </div>
+    <div class="order-item">
+      <div class="item-thumb"><svg viewBox="0 0 64 64" fill="none"><ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" stroke-width="2.2"/><path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" stroke-width="2.2"/></svg></div>
+      <div class="item-info">
+        <div class="item-name">16-Piece Dinnerware Set, White</div>
+        <div class="item-meta">CP: 2 &middot; #30003 &middot; Qty: 1 case</div>
+      </div>
+      <div class="item-price">$44.00</div>
+    </div>
+
+    <div class="totals">
+      <div class="total-row"><span class="k">Subtotal</span><span class="v">$161.00</span></div>
+      <div class="total-row"><span class="k">Freight</span><span class="v">FREE</span></div>
+      <div class="total-row"><span class="k">Tax</span><span class="v">$0.00</span></div>
+      <div class="total-row grand"><span class="k">Total Paid</span><span class="v">$161.00</span></div>
+    </div>
+  </div>
+
+  <div class="action-row">
+    <a href="j7wings_homepage.html"><button class="btn-outline">Continue Shopping</button></a>
+    <button class="btn-primary">Download Invoice (PDF)</button>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+    <span class="mono" style="font-size:11.5px;color:#6E7688;">CATALOG SYNCED &middot; WEEKLY</span>
+  </div>
+</footer>
+
+</body>
+</html>

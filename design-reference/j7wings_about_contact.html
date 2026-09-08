@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About &amp; Contact — J7 Wings Wholesale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-2:#1F3358;
+    --amber:#D98E2B;
+    --amber-dark:#B5721A;
+    --paper:#F3F1EC;
+    --ink:#1C1C1C;
+    --line:#D8D4CA;
+    --stamp:#2E6B4F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{text-decoration:none;color:inherit;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+
+  .topbar{background:var(--navy);color:#EDEAE1;font-size:12.5px;}
+  .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 24px;letter-spacing:0.04em;}
+  header.main{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px;}
+  .logo{display:flex;align-items:center;gap:10px;}
+  .logo-mark{width:38px;height:38px;background:var(--navy);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .logo-mark svg{width:22px;height:22px;}
+  .logo-text{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:0.03em;line-height:1;}
+  .logo-text span{display:block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:400;letter-spacing:0.18em;color:var(--amber-dark);text-transform:uppercase;margin-top:3px;}
+  nav.primary{display:flex;gap:28px;font-size:14px;font-weight:600;}
+  nav.primary a:hover{color:var(--amber-dark);}
+  nav.primary a.current{color:var(--amber-dark);}
+  .header-actions{display:flex;align-items:center;gap:22px;font-size:14px;font-weight:600;}
+  .cart-badge{background:var(--amber);color:#fff;border-radius:999px;font-size:10.5px;padding:1px 6px;font-family:'IBM Plex Mono',monospace;}
+
+  .breadcrumb{background:#fff;border-bottom:1px solid var(--line);padding:14px 0;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#8A8577;}
+  .breadcrumb .sep{margin:0 8px;color:#C8C3B6;}
+  .breadcrumb .current{color:var(--navy);font-weight:600;}
+
+  /* hero */
+  .about-hero{background:var(--navy);color:#fff;padding:60px 0;}
+  .about-hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;color:var(--amber);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .about-hero .eyebrow::before{content:'';width:24px;height:1px;background:var(--amber);}
+  .about-hero h1{font-size:38px;line-height:1.15;margin:0 0 14px;max-width:640px;}
+  .about-hero p{font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;color:#C9CEDA;max-width:560px;margin:0;}
+
+  /* about content */
+  .section{padding:60px 0;}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .about-grid h2{font-size:24px;margin:0 0 16px;}
+  .about-grid p{font-size:14.5px;line-height:1.75;color:#4A4A46;margin:0 0 16px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);margin-top:24px;}
+  .stat{padding:20px 0 0;}
+  .stat .n{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:var(--navy);}
+  .stat .l{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A8577;letter-spacing:0.06em;text-transform:uppercase;margin-top:4px;}
+
+  .manifest{background:#fff;border:1px dashed var(--navy);padding:26px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+  .manifest h3{font-size:14px;margin:0 0 16px;color:var(--navy);}
+  .manifest .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);}
+  .manifest .row:last-child{border-bottom:none;}
+  .manifest .k{color:#8A8577;}
+  .manifest .v{font-weight:600;color:var(--navy);}
+
+  /* values */
+  .values-section{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .section-head{text-align:center;max-width:520px;margin:0 auto 40px;}
+  .section-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber-dark);letter-spacing:0.1em;margin-bottom:10px;}
+  .section-head h2{font-size:24px;margin:0;}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .value-card{background:var(--paper);border:1px solid var(--line);padding:26px;}
+  .value-card .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-dark);letter-spacing:0.08em;margin-bottom:12px;}
+  .value-card h3{font-size:16px;margin:0 0 10px;text-transform:none;letter-spacing:0;}
+  .value-card p{font-size:13px;line-height:1.65;color:#5A5A54;margin:0;}
+
+  /* contact */
+  .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;padding:60px 0;align-items:start;}
+  .contact-info h2{font-size:24px;margin:0 0 16px;}
+  .contact-info p{font-size:14px;line-height:1.7;color:#4A4A46;margin:0 0 26px;}
+  .info-item{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--line);}
+  .info-item:last-child{border-bottom:1px solid var(--line);}
+  .info-icon{width:36px;height:36px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .info-icon svg{width:17px;height:17px;}
+  .info-item .label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;margin-bottom:4px;}
+  .info-item .val{font-size:13.5px;font-weight:600;color:var(--navy);}
+  .info-item .sub{font-size:12px;color:#6E6A5F;margin-top:2px;}
+
+  .form-card{background:#fff;border:1px solid var(--line);padding:30px;}
+  .form-card h3{font-size:17px;margin:0 0 6px;text-transform:none;letter-spacing:0;}
+  .form-card .sub{font-size:13px;color:#6E6A5F;margin:0 0 24px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:#8A8577;}
+  .field input, .field select, .field textarea{border:1px solid var(--line);padding:11px 12px;font-family:'Inter',sans-serif;font-size:13.5px;outline:none;background:#fff;resize:vertical;}
+  .field input:focus, .field textarea:focus{border-color:var(--navy);}
+  .btn-primary{width:100%;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:15px;border:none;cursor:pointer;font-size:13.5px;text-transform:uppercase;margin-top:6px;}
+  .btn-primary:hover{background:var(--navy-2);}
+
+  footer{background:#101B30;color:#AEB4C2;padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;font-size:12px;flex-wrap:wrap;gap:10px;}
+
+  @media(max-width:900px){
+    nav.primary{display:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .values-grid{grid-template-columns:1fr;}
+    .contact-layout{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap"><span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span><span><a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a></span></div>
+</div>
+
+<header class="main">
+  <div class="wrap">
+    <div class="header-row">
+      <a href="j7wings_homepage.html" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12L11 9L12 2L13 9L22 12L13 15L12 22L11 15L2 12Z" fill="#D98E2B"/></svg></div>
+        <div class="logo-text">J7 WINGS<span>Wholesale Supply Co.</span></div>
+      </a>
+      <nav class="primary">
+        <a href="#">New Arrivals</a><a href="#">Specials</a><a href="#">Best Sellers</a><a href="#" class="current">About</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#">Sign In</a>
+        <a href="#">Cart <span class="cart-badge">0</span></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <div class="wrap"><a href="j7wings_homepage.html">Home</a><span class="sep">/</span><span class="current">About &amp; Contact</span></div>
+</div>
+
+<section class="about-hero">
+  <div class="wrap">
+    <div class="eyebrow">About J7 Wings</div>
+    <h1>Wholesale supply, built on reliability and full case-pack pricing.</h1>
+    <p>We help dollar stores, discount retailers, gift shops, and independent grocers stock apparel, footwear, and crockery without the markup of middlemen.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap about-grid">
+    <div>
+      <h2>Our Story</h2>
+      <p>J7 Wings started as a small import operation supplying local retailers in Rawalpindi and Islamabad. Today we distribute apparel, footwear, and crockery to shop owners across the region &mdash; sourcing in bulk so our buyers never pay retail markup.</p>
+      <p>Every listing on our site ships in a full case pack, priced for resellers. Our goal is simple: make it easy for small and mid-size retailers to stock shelves without dealing with a dozen separate suppliers.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">3</div><div class="l">Core Categories</div></div>
+        <div class="stat"><div class="n">$500</div><div class="l">Order Minimum</div></div>
+        <div class="stat"><div class="n">48HR</div><div class="l">Dispatch Window</div></div>
+      </div>
+    </div>
+    <div class="manifest">
+      <h3>// Company Manifest</h3>
+      <div class="row"><span class="k">FOUNDED</span><span class="v">2024</span></div>
+      <div class="row"><span class="k">HEADQUARTERS</span><span class="v">RAWALPINDI, PK</span></div>
+      <div class="row"><span class="k">SERVES</span><span class="v">RETAILERS NATIONWIDE</span></div>
+      <div class="row"><span class="k">ACCOUNT TYPE</span><span class="v">WHOLESALE / RESELLER</span></div>
+      <div class="row"><span class="k">SUPPORT HOURS</span><span class="v">MON&ndash;SAT, 9AM&ndash;6PM</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="values-section section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">// WHY BUYERS CHOOSE US</div>
+      <h2>What We Stand For</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="num">01</div>
+        <h3>Case-Pack Pricing</h3>
+        <p>No retail markup. Every item is priced the way a reseller should see it &mdash; by the case, not the piece.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">02</div>
+        <h3>Fast Dispatch</h3>
+        <p>Orders are prepared and dispatched within 48 hours, with free freight on orders over $500.</p>
+      </div>
+      <div class="value-card">
+        <div class="num">03</div>
+        <h3>Direct Support</h3>
+        <p>A real team you can call or message &mdash; not a ticket queue. We know our buyers by name.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <h2>Get in Touch</h2>
+      <p>Have a question about an order, a product, or opening a wholesale account? Reach out &mdash; we typically respond within one business day.</p>
+
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 6L12 13L2 6M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="#16233F" stroke-width="1.6"/></svg></div>
+        <div><div class="label">Email</div><div class="val">orders@j7wings.com</div><div class="sub">For order and account queries</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.9V19.9C22 20.5 21.5 21 20.9 21C10 21 3 14 3 3.1C3 2.5 3.5 2 4.1 2H7.1C7.6 2 8.1 2.4 8.1 2.9C8.2 4.1 8.5 5.3 8.9 6.4C9.1 6.9 8.9 7.5 8.5 7.8L6.9 9C8.1 11.6 10.4 13.9 13 15.1L14.2 13.5C14.5 13.1 15.1 12.9 15.6 13.1C16.7 13.5 17.9 13.8 19.1 13.9C19.6 14 20 14.4 20 14.9V16.9" stroke="#16233F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div><div class="label">Phone</div><div class="val">+92 300 000 0000</div><div class="sub">Mon&ndash;Sat, 9AM&ndash;6PM PKT</div></div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 5 7 2 12 2C17 2 21 5 21 10Z" stroke="#16233F" stroke-width="1.6"/><circle cx="12" cy="10" r="3" stroke="#16233F" stroke-width="1.6"/></svg></div>
+        <div><div class="label">Warehouse</div><div class="val">Satellite Town, Rawalpindi</div><div class="sub">Punjab, Pakistan 46000</div></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Send Us a Message</h3>
+      <p class="sub">Fill out the form and our team will get back to you shortly.</p>
+      <div class="field-row">
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+        <div class="field"><label>Business Name</label><input type="text" placeholder="Your store/business"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Email</label><input type="email" placeholder="you@business.com"></div>
+        <div class="field"><label>Phone</label><input type="tel" placeholder="+92 3XX XXXXXXX"></div>
+      </div>
+      <div class="field-row">
+        <div class="field full"><label>Subject</label>
+          <select><option>General Inquiry</option><option>Order Support</option><option>Wholesale Account Application</option><option>Product Availability</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field full"><label>Message</label><textarea rows="4" placeholder="How can we help?"></textarea></div>
+      </div>
+      <button class="btn-primary">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+    <span class="mono" style="font-size:11.5px;color:#6E7688;">CATALOG SYNCED &middot; WEEKLY</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+/* Shared header/topbar/footer/base styles now live in Layout.css (imported once in App.jsx). */
+
+h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:0.02em;}
+
+  .page-head{padding:34px 0 22px;border-bottom:2px solid var(--navy);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:10px;}
+  .page-head .tag{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--amber-dark);letter-spacing:0.1em;margin-bottom:8px;}
+  .page-head h1{font-size:28px;margin:0;}
+  .item-count{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#6E6A5F;}
+
+  /* progress steps */
+  .steps{display:flex;gap:0;padding:22px 0 6px;}
+  .step{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#A6A196;}
+  .step .dot{width:24px;height:24px;border-radius:50%;border:1.5px solid #C8C3B6;display:flex;align-items:center;justify-content:center;font-size:11px;}
+  .step.active{color:var(--navy);font-weight:600;}
+  .step.active .dot{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .step-line{width:50px;height:1px;background:var(--line);margin:0 14px;align-self:center;}
+
+  .cart-layout{display:grid;grid-template-columns:1fr 340px;gap:30px;padding:26px 0 70px;align-items:start;}
+
+  /* cart table */
+  .cart-table{background:#fff;border:1px solid var(--line);}
+  .cart-header-row{display:grid;grid-template-columns:90px 1fr 130px 130px 110px 40px;gap:14px;padding:14px 20px;background:var(--paper);border-bottom:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:#8A8577;}
+  .cart-item{display:grid;grid-template-columns:90px 1fr 130px 130px 110px 40px;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line);align-items:center;}
+  .cart-item:last-child{border-bottom:none;}
+  .item-thumb{width:70px;height:70px;background:#F6F4EF;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .item-thumb svg{width:34px;height:34px;opacity:0.85;}
+  .item-name{font-size:13.5px;font-weight:600;line-height:1.4;margin-bottom:4px;}
+  .item-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A8577;display:flex;gap:10px;}
+  .qty-stepper{display:flex;border:1.5px solid var(--navy);width:fit-content;}
+  .qty-stepper button{width:30px;height:34px;background:#fff;border:none;font-size:14px;cursor:pointer;}
+  .qty-stepper button:hover{background:var(--paper);}
+  .qty-stepper input{width:38px;border:none;border-left:1.5px solid var(--navy);border-right:1.5px solid var(--navy);text-align:center;font-family:'IBM Plex Mono',monospace;font-size:13px;outline:none;}
+  .item-price{font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:600;color:var(--navy);}
+  .item-total{font-family:'IBM Plex Mono',monospace;font-size:14.5px;font-weight:600;color:var(--navy);}
+  .remove-btn{width:30px;height:30px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .remove-btn:hover{border-color:var(--danger);}
+  .remove-btn:hover svg path{stroke:var(--danger);}
+
+  .cart-footer-row{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;}
+  .continue-link{font-family:'IBM Plex Mono',monospace;font-size:12.5px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:8px;}
+  .continue-link:hover{color:var(--amber-dark);}
+
+  /* summary */
+  .summary{background:#fff;border:1px dashed var(--navy);padding:24px;position:sticky;top:100px;}
+  .summary h3{font-size:16px;margin:0 0 18px;}
+  .summary-row{display:flex;justify-content:space-between;padding:9px 0;font-family:'IBM Plex Mono',monospace;font-size:13px;border-bottom:1px solid var(--line);}
+  .summary-row .k{color:#6E6A5F;}
+  .summary-row .v{font-weight:600;color:var(--navy);}
+  .summary-row.total{border-bottom:none;border-top:2px solid var(--navy);margin-top:6px;padding-top:16px;}
+  .summary-row.total .v{font-size:20px;}
+  .promo-row{display:flex;gap:0;margin:16px 0;}
+  .promo-row input{flex:1;border:1px solid var(--line);padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;outline:none;}
+  .promo-row button{background:var(--paper);border:1px solid var(--line);border-left:none;padding:0 16px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;text-transform:uppercase;cursor:pointer;}
+  .btn-checkout{width:100%;background:var(--navy);color:#fff;font-family:'Oswald',sans-serif;font-weight:700;letter-spacing:0.03em;padding:16px;border:none;cursor:pointer;font-size:14px;text-transform:uppercase;margin-top:6px;}
+  .btn-checkout:hover{background:var(--navy-2);}
+  .min-order-note{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--amber-dark);text-align:center;margin-top:12px;padding:10px;background:#FBF2E3;border:1px solid #EAD3A6;}
+
+  @media(max-width:900px){
+    nav.primary{display:none;}
+    .cart-layout{grid-template-columns:1fr;}
+    .cart-header-row{display:none;}
+    .cart-item{grid-template-columns:70px 1fr;grid-template-areas:"thumb name" "thumb meta" "qty price" "remove remove";row-gap:8px;}
+    .summary{position:static;}
+  }
