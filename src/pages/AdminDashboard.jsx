@@ -235,7 +235,7 @@ export default function AdminDashboard() {
         </div>
       </aside>
 
-      <main className="main">
+      <main className="adm-main">
         <div className="topbar">
           <div>
             <h1>Dashboard</h1>

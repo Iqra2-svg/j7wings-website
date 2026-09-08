@@ -226,7 +226,7 @@ export default function AdminProductForm() {
   if (loading) {
     return (
       <div className="shell">
-        <main className="main" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <main className="apf-main" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <p style={{ color: '#8A8577', fontFamily: 'IBM Plex Mono, monospace' }}>Loading product&hellip;</p>
         </main>
       </div>
@@ -288,7 +288,7 @@ export default function AdminProductForm() {
         </div>
       </aside>
 
-      <main className="main">
+      <main className="apf-main">
         <div className="breadcrumb-row">
           <Link to="/admin/dashboard">Dashboard</Link> / <Link to="/admin/dashboard">Products</Link> /{' '}
           <span style={{ color: 'var(--navy)', fontWeight: 600 }}>{isEditMode ? 'Edit Product' : 'Add Product'}</span>

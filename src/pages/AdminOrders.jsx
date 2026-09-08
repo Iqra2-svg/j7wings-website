@@ -96,7 +96,7 @@ export default function AdminOrders() {
         </div>
       </aside>
 
-      <main className="main">
+      <main className="adm-main">
         <div className="topbar">
           <div>
             <h1>Orders</h1>

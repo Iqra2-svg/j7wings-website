@@ -80,7 +80,7 @@ export default function AdminCustomers() {
         </div>
       </aside>
 
-      <main className="main">
+      <main className="adm-main">
         <div className="topbar">
           <div>
             <h1>Customers</h1>
