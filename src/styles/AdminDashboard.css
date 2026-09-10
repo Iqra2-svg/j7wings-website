@@ -67,10 +67,10 @@
   .stock-badge.low{background:#FBF2E3;color:var(--amber-dark);}
   .stock-badge.out{background:#FAE4E0;color:var(--danger);}
   .row-actions{display:flex;gap:8px;}
-  .icon-btn{width:30px;height:30px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-  .icon-btn:hover{border-color:var(--navy);}
-  .icon-btn.del:hover{border-color:var(--danger);}
-  .icon-btn.del:hover svg path{stroke:var(--danger);}
+  .adm-icon-btn{width:30px;height:30px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .adm-icon-btn:hover{border-color:var(--navy);}
+  .adm-icon-btn.del:hover{border-color:var(--danger);}
+  .adm-icon-btn.del:hover svg path{stroke:var(--danger);}
 
   .table-foot{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A8577;}
   .pager{display:flex;gap:6px;}

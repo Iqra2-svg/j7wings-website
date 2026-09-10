@@ -370,10 +370,10 @@ export default function AdminDashboard() {
                       </td>
                       <td>
                         <div className="row-actions">
-                          <Link to={`/admin/products/${p.id}/edit`} className="icon-btn">
+                          <Link to={`/admin/products/${p.id}/edit`} className="adm-icon-btn">
                             <IconEdit />
                           </Link>
-                          <button className="icon-btn del" onClick={() => handleDelete(p.id)}>
+                          <button className="adm-icon-btn del" onClick={() => handleDelete(p.id)}>
                             <IconDelete />
                           </button>
                         </div>
