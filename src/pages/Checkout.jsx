@@ -14,7 +14,7 @@ export default function Checkout() {
     businessName: '',
     email: '',
     phone: '',
-    accountType: 'Wholesale / Reseller',
+    accountType: 'Retailer',
     street: '',
     city: '',
     province: '',
@@ -136,7 +136,7 @@ export default function Checkout() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>Need help? +92 300 000 0000</span>
         </div>
       </div>
@@ -151,8 +151,7 @@ export default function Checkout() {
             </div>
             <div className="logo-text">
               J7 WINGS
-              <span>Wholesale Supply Co.</span>
-            </div>
+                          </div>
           </Link>
           <div className="secure-note">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -218,7 +217,7 @@ export default function Checkout() {
                 <div className="cko-field">
                   <label>Account Type</label>
                   <select value={form.accountType} onChange={updateField('accountType')}>
-                    <option>Wholesale / Reseller</option>
+                    <option>Retailer</option>
                     <option>Discount Store</option>
                     <option>Gift Shop</option>
                     <option>Other</option>
@@ -322,7 +321,7 @@ export default function Checkout() {
               ) : (
                 <p style={{ fontSize: '13px', color: '#6E6A5F', lineHeight: 1.6 }}>
                   You'll receive an invoice by email, payable within 15 days. Available to
-                  approved wholesale accounts.
+                  approved accounts.
                 </p>
               )}
             </div>
@@ -382,7 +381,7 @@ export default function Checkout() {
 
       <footer>
         <div className="wrap">
-          <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
           <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
             CATALOG SYNCED &middot; WEEKLY
           </span>

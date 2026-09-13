@@ -125,9 +125,8 @@ export default function Home() {
     <div className="page-home">
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>
-            <a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp;{' '}
             <a href="#">Contact Us</a> &nbsp;|&nbsp; +92 300 000 0000
           </span>
         </div>
@@ -144,8 +143,7 @@ export default function Home() {
               </div>
               <div className="logo-text">
                 J7 WINGS
-                <span>Wholesale Supply Co.</span>
-              </div>
+                              </div>
             </Link>
             <nav className="primary">
               <Link to="/listing?filter=new">New Arrivals</Link>
@@ -251,7 +249,7 @@ export default function Home() {
       </header>
 
       <div className="announce">
-        FREE FREIGHT ON WHOLESALE ORDERS OVER $500 &nbsp;&middot;&nbsp; NEW BUYERS GET 10% OFF FIRST INVOICE
+        FREE FREIGHT ON ORDERS OVER $500 &nbsp;&middot;&nbsp; NEW BUYERS GET 10% OFF FIRST INVOICE
       </div>
 
       <section className="hero">
@@ -259,7 +257,7 @@ export default function Home() {
           <div>
             <div className="eyebrow">Est. Import &amp; Distribution</div>
             <h1>
-              Stock your shelves with <em>wholesale-first</em> reliability.
+              Stock your shelves with <em>reliable</em> service.
             </h1>
             <p>
               J7 Wings supplies apparel, footwear, and crockery to dollar stores, discount
@@ -279,7 +277,7 @@ export default function Home() {
                 </svg>
               </Link>
               <Link to="/login" className="home-btn-outline">
-                Open Wholesale Account
+                Open an Account
               </Link>
             </div>
           </div>
@@ -526,7 +524,7 @@ export default function Home() {
             </div>
             <h2>Built for buyers who move volume.</h2>
             <p>
-              J7 Wings is a wholesale distributor supplying apparel, footwear, and crockery to
+              J7 Wings supplies apparel, footwear, and crockery to
               dollar stores, discount retailers, gift shops, and independent grocers. Every
               listing ships in full case packs at reseller pricing &mdash; no minimums beyond
               your first invoice.
@@ -549,7 +547,7 @@ export default function Home() {
           <div className="manifest">
             <div className="row">
               <span className="k">ACCOUNT TYPE</span>
-              <span className="v">WHOLESALE / RESELLER</span>
+              <span className="v">RETAILER</span>
             </div>
             <div className="row">
               <span className="k">PAYMENT</span>
@@ -590,7 +588,7 @@ export default function Home() {
             <div className="foot-brand">
               <div className="logo-text">J7 WINGS</div>
               <p>
-                Wholesale apparel, footwear &amp; crockery supply for retailers who buy by the
+                Apparel, footwear &amp; crockery supply for retailers who buy by the
                 case, not the piece.
               </p>
             </div>
@@ -652,7 +650,7 @@ export default function Home() {
             </div>
           </div>
           <div className="foot-bottom">
-            <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+            <span>&copy; 2026 J7 Wings. All rights reserved.</span>
             <div className="socials">
               <a href="#">f</a>
               <a href="#">X</a>

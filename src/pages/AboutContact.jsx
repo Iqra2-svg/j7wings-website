@@ -48,9 +48,9 @@ export default function AboutContact() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>
-            <a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a>
+            <a href="#">Contact Us</a>
           </span>
         </div>
       </div>
@@ -66,8 +66,7 @@ export default function AboutContact() {
               </div>
               <div className="logo-text">
                 J7 WINGS
-                <span>Wholesale Supply Co.</span>
-              </div>
+                              </div>
             </Link>
             <nav className="primary">
               <Link to="/listing?filter=new">New Arrivals</Link>
@@ -98,7 +97,7 @@ export default function AboutContact() {
       <section className="about-hero">
         <div className="wrap">
           <div className="eyebrow">About J7 Wings</div>
-          <h1>Wholesale supply, built on reliability and full case-pack pricing.</h1>
+          <h1>Reliable supply, built on full case-pack pricing.</h1>
           <p>
             We help dollar stores, discount retailers, gift shops, and independent grocers stock
             apparel, footwear, and crockery without the markup of middlemen.
@@ -152,7 +151,7 @@ export default function AboutContact() {
             </div>
             <div className="row">
               <span className="k">ACCOUNT TYPE</span>
-              <span className="v">WHOLESALE / RESELLER</span>
+              <span className="v">RETAILER</span>
             </div>
             <div className="row">
               <span className="k">SUPPORT HOURS</span>
@@ -202,7 +201,7 @@ export default function AboutContact() {
           <div className="contact-info">
             <h2>Get in Touch</h2>
             <p>
-              Have a question about an order, a product, or opening a wholesale account? Reach
+              Have a question about an order, a product, or opening an account? Reach
               out &mdash; we typically respond within one business day.
             </p>
 
@@ -305,7 +304,7 @@ export default function AboutContact() {
                 <select value={form.subject} onChange={updateField('subject')}>
                   <option>General Inquiry</option>
                   <option>Order Support</option>
-                  <option>Wholesale Account Application</option>
+                  <option>Account Application</option>
                   <option>Product Availability</option>
                 </select>
               </div>
@@ -325,7 +324,7 @@ export default function AboutContact() {
 
       <footer>
         <div className="wrap">
-          <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
           <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
             CATALOG SYNCED &middot; WEEKLY
           </span>

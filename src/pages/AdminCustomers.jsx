@@ -90,7 +90,7 @@ export default function AdminCustomers() {
 
         <div className="table-card">
           <div className="table-head">
-            <h3>Wholesale Accounts</h3>
+            <h3>Customer Accounts</h3>
           </div>
 
           <table>

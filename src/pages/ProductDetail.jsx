@@ -46,7 +46,7 @@ const staticTabs = {
   Shipping: () => (
     <p>
       Orders ship within 48 hours via Standard Freight (3&ndash;5 business days) or Express
-      Freight (1&ndash;2 business days). Freight is free on wholesale orders over $500.
+      Freight (1&ndash;2 business days). Freight is free on orders over $500.
     </p>
   ),
   'Case Pack Info': (cp) => (
@@ -157,9 +157,9 @@ export default function ProductDetail() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>
-            <a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a>
+            <a href="#">Contact Us</a>
           </span>
         </div>
       </div>
@@ -175,8 +175,7 @@ export default function ProductDetail() {
               </div>
               <div className="logo-text">
                 J7 WINGS
-                <span>Wholesale Supply Co.</span>
-              </div>
+                              </div>
             </Link>
             <nav className="primary">
               <Link to="/listing?filter=new">New Arrivals</Link>
@@ -409,7 +408,7 @@ export default function ProductDetail() {
 
       <footer>
         <div className="wrap">
-          <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
           <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
             CATALOG SYNCED &middot; WEEKLY
           </span>

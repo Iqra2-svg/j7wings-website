@@ -88,15 +88,14 @@ export default function Login() {
           </div>
           <div className="logo-text">
             J7 WINGS
-            <span>Wholesale Supply Co.</span>
-          </div>
+                      </div>
         </Link>
 
         <div className="brand-mid">
           <div className="eyebrow">Buyer Access</div>
           <h1>Your account, your case-pack pricing.</h1>
           <p>
-            Sign in to view wholesale rates, reorder past invoices, and track dispatch status on
+            Sign in to view your rates, reorder past invoices, and track dispatch status on
             every order.
           </p>
         </div>
@@ -104,7 +103,7 @@ export default function Login() {
         <div className="manifest">
           <div className="row">
             <span className="k">ACCOUNT TYPE</span>
-            <span className="v">WHOLESALE / RESELLER</span>
+            <span className="v">RETAILER</span>
           </div>
           <div className="row">
             <span className="k">MIN. ORDER</span>
@@ -135,7 +134,7 @@ export default function Login() {
 
           <h2>{isSignup ? 'Create your account' : 'Welcome back'}</h2>
           <p className="form-sub">
-            {isSignup ? 'Set up wholesale access in under a minute.' : 'Sign in to your wholesale account to continue.'}
+            {isSignup ? 'Set up your access in under a minute.' : 'Sign in to your account to continue.'}
           </p>
 
           {errorMessage && (
@@ -203,7 +202,7 @@ export default function Login() {
             {submitting ? (isSignup ? 'Creating Account...' : 'Signing In...') : isSignup ? 'Create Account' : 'Sign In'}
           </button>
 
-          <div className="divider">Wholesale Buyers</div>
+          <div className="divider">New Here?</div>
 
           <div className="wholesale-note">
             <strong>New to J7 Wings?</strong> Creating an account gives you access to case-pack

@@ -20,9 +20,9 @@ export default function Cart() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>
-            <a href="#">Open a Wholesale Account</a> &nbsp;|&nbsp; <a href="#">Contact Us</a>
+            <a href="#">Contact Us</a>
           </span>
         </div>
       </div>
@@ -38,8 +38,7 @@ export default function Cart() {
               </div>
               <div className="logo-text">
                 J7 WINGS
-                <span>Wholesale Supply Co.</span>
-              </div>
+                              </div>
             </Link>
             <nav className="primary">
               <Link to="/listing?filter=new">New Arrivals</Link>
@@ -192,7 +191,7 @@ export default function Cart() {
             </button>
             {remainingForMin > 0 && (
               <div className="min-order-note">
-                Add ${remainingForMin.toFixed(2)} more to reach the ${MIN_ORDER} wholesale order minimum
+                Add ${remainingForMin.toFixed(2)} more to reach the ${MIN_ORDER} order minimum
               </div>
             )}
           </div>
@@ -201,7 +200,7 @@ export default function Cart() {
 
       <footer>
         <div className="wrap">
-          <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
           <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
             CATALOG SYNCED &middot; WEEKLY
           </span>

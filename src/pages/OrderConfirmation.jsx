@@ -111,7 +111,7 @@ export default function OrderConfirmation() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>WHOLESALE ACCOUNTS &middot; MIN. ORDER $500</span>
+          <span>MIN. ORDER $500</span>
           <span>Need help? +92 300 000 0000</span>
         </div>
       </div>
@@ -126,8 +126,7 @@ export default function OrderConfirmation() {
             </div>
             <div className="logo-text">
               J7 WINGS
-              <span>Wholesale Supply Co.</span>
-            </div>
+                          </div>
           </Link>
         </div>
       </header>
@@ -172,7 +171,7 @@ export default function OrderConfirmation() {
           <p>
             {order.status === 'pending_payment'
               ? "We haven't received payment confirmation for this order yet."
-              : 'Thank you — your wholesale order has been received and is being processed.'}
+              : 'Thank you — your order has been received and is being processed.'}
           </p>
           <p>
             A confirmation has been sent to <strong>{order.email}</strong>
@@ -272,7 +271,7 @@ export default function OrderConfirmation() {
 
       <footer>
         <div className="wrap">
-          <span>&copy; 2026 J7 Wings Wholesale Supply Co. All rights reserved.</span>
+          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
           <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
             CATALOG SYNCED &middot; WEEKLY
           </span>
