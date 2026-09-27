@@ -4,6 +4,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/AboutContact.css';
+import Footer from '../components/Footer';
 
 export default function AboutContact() {
   const { totalItems } = useCart();
@@ -322,14 +323,7 @@ export default function AboutContact() {
         </div>
       </section>
 
-      <footer>
-        <div className="wrap">
-          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
-          <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
-            CATALOG SYNCED &middot; WEEKLY
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -4,6 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/Listing.css';
+import Footer from '../components/Footer';
 
 const IconTee = () => (
   <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" strokeWidth="2.2" /></svg>
@@ -468,14 +469,7 @@ export default function Listing() {
         </div>
       </div>
 
-      <footer>
-        <div className="wrap">
-          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
-          <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
-            CATALOG SYNCED &middot; WEEKLY
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

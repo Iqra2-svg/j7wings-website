@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import '../styles/Cart.css';
+import Footer from '../components/Footer';
 
 const MIN_ORDER = 500;
 
@@ -198,14 +199,7 @@ export default function Cart() {
         </div>
       </div>
 
-      <footer>
-        <div className="wrap">
-          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
-          <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
-            CATALOG SYNCED &middot; WEEKLY
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

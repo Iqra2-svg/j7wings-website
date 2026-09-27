@@ -4,6 +4,7 @@ import { doc, getDoc, collection, query, where, limit, getDocs } from 'firebase/
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/ProductDetail.css';
+import Footer from '../components/Footer';
 
 const IconTee = ({ stroke = '#16233F' }) => (
   <svg viewBox="0 0 64 64" fill="none">
@@ -406,14 +407,7 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      <footer>
-        <div className="wrap">
-          <span>&copy; 2026 J7 Wings. All rights reserved.</span>
-          <span className="mono" style={{ fontSize: '11.5px', color: '#6E7688' }}>
-            CATALOG SYNCED &middot; WEEKLY
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

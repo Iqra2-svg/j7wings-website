@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import Footer from '../components/Footer';
 import '../styles/Login.css';
 
 export default function Login() {
@@ -78,6 +79,7 @@ export default function Login() {
   };
 
   return (
+    <>
     <div className="page">
       <div className="brand-panel">
         <Link to="/" className="logo">
@@ -212,5 +214,7 @@ export default function Login() {
         </form>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
