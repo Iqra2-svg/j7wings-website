@@ -1,0 +1,100 @@
+/* Styles for the Admin > Categories page. Kept in its own file so nothing
+   here can collide with class names used on other admin pages. */
+
+.catmgr-add-card { padding: 18px 22px; }
+.catmgr-add-form { display: flex; gap: 10px; padding: 18px 22px; }
+.catmgr-add-form input {
+  flex: 1;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+}
+
+.catmgr-cat-card { margin-bottom: 18px; }
+.catmgr-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #8A8577;
+  margin-top: 3px;
+}
+
+.catmgr-delete-main {
+  background: #fff;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  font-family: 'Oswald', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+.catmgr-delete-main:hover { background: var(--danger); color: #fff; }
+.catmgr-delete-main:disabled { opacity: 0.5; cursor: default; }
+
+.catmgr-body { padding: 18px 22px; }
+
+.catmgr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.catmgr-empty { font-size: 12.5px; color: #8A8577; font-style: italic; }
+
+.catmgr-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 6px 6px 6px 12px;
+  font-size: 12.5px;
+  color: var(--navy);
+}
+.catmgr-chip button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  color: #8A8577;
+  padding: 2px 4px;
+}
+.catmgr-chip button:hover { color: var(--danger); }
+.catmgr-chip button:disabled { opacity: 0.5; cursor: default; }
+
+.catmgr-sub-add { display: flex; gap: 8px; max-width: 420px; }
+.catmgr-sub-add input {
+  flex: 1;
+  border: 1px solid var(--line);
+  padding: 9px 11px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+.catmgr-sub-add button {
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  padding: 9px 16px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.catmgr-sub-add button:hover { background: var(--navy-2); }
+.catmgr-sub-add button:disabled { opacity: 0.5; cursor: default; }
+
+.catmgr-signout {
+  margin-top: 12px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #B7BDCB;
+  padding: 9px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.catmgr-signout:hover { border-color: rgba(255, 255, 255, 0.4); color: #fff; }

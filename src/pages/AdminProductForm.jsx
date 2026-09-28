@@ -3,13 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../firebase';
+import useCategories from '../hooks/useCategories';
 import '../styles/AdminProductForm.css';
-
-const INITIAL_SUB_CATEGORIES = {
-  'T-Shirts': ["Men's T-Shirts", "Women's T-Shirts", 'Kids T-Shirts', 'Graphic Tees', 'Plain/Basic Tees'],
-  Shoes: ["Men's Shoes", "Women's Shoes", 'Kids Shoes', 'Sports/Sneakers', 'Sandals'],
-  Crockery: ['Plates', 'Bowls', 'Dinner Sets', 'Serving Platters', 'Drinking Glasses', 'Mugs', 'Tea Sets', 'Cups & Saucers'],
-};
 
 export default function AdminProductForm() {
   const navigate = useNavigate();
@@ -23,15 +18,21 @@ export default function AdminProductForm() {
   const [showNewMainCat, setShowNewMainCat] = useState(false);
   const [newMainCatName, setNewMainCatName] = useState('');
 
-  // Categories start from the defaults above, but admins can add more —
-  // both lists live in state so new ones persist for the rest of this session.
-  const [subCategoriesMap, setSubCategoriesMap] = useState(INITIAL_SUB_CATEGORIES);
-  const mainCategoryOptions = Object.keys(subCategoriesMap);
+  // Categories now live in Firestore (the "categories" collection) so that
+  // adding one here — or deleting one from Admin > Categories — is permanent
+  // and shows up the same way everywhere (this form, the storefront nav,
+  // and the listing page filters).
+  const {
+    subCategoriesMap,
+    mainCategoryOptions,
+    addMainCategory,
+    addSubCategory,
+  } = useCategories();
 
   // Form fields
   const [itemNo, setItemNo] = useState('');
   const [mainCategory, setMainCategory] = useState('T-Shirts');
-  const [subCategory, setSubCategory] = useState(INITIAL_SUB_CATEGORIES['T-Shirts'][0]);
+  const [subCategory, setSubCategory] = useState('');
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [cp, setCp] = useState('');
@@ -91,12 +92,7 @@ export default function AdminProductForm() {
           const d = snap.data();
           setItemNo(d.itemNo || id);
           setMainCategory(d.category || 'T-Shirts');
-          setSubCategory(d.subCategory || subCategoriesMap[d.category]?.[0] || '');
-          // If this product's category isn't one of the known ones (e.g. it was
-          // added directly in Firestore), register it so the dropdowns show it.
-          if (d.category && !subCategoriesMap[d.category]) {
-            setSubCategoriesMap((prev) => ({ ...prev, [d.category]: d.subCategory ? [d.subCategory] : [] }));
-          }
+          setSubCategory(d.subCategory || '');
           setName(d.name || '');
           setPrice(d.price != null ? String(d.price) : '');
           setCp(d.cp != null ? String(d.cp) : '');
@@ -119,6 +115,16 @@ export default function AdminProductForm() {
     }
     fetchProduct();
   }, [id, isEditMode, navigate]);
+
+  // Once categories have loaded from Firestore, pick a sensible default
+  // sub-category for a brand-new product (edit mode already sets its own
+  // subCategory above from the saved product).
+  useEffect(() => {
+    if (isEditMode) return;
+    if (!subCategory && subCategoriesMap[mainCategory]?.length) {
+      setSubCategory(subCategoriesMap[mainCategory][0]);
+    }
+  }, [subCategoriesMap, mainCategory, isEditMode, subCategory]);
 
   // Mirrors the original checkQty() + setStock() logic:
   // typing 0 auto-selects "Out of Stock", and picking "Out of Stock" zeroes the qty field.
@@ -146,24 +152,31 @@ export default function AdminProductForm() {
     setSubCategory(subCategoriesMap[cat]?.[0] || '');
   };
 
-  const handleAddNewMainCategory = () => {
+  const handleAddNewMainCategory = async () => {
     if (!newMainCatName.trim()) return;
     const cat = newMainCatName.trim();
-    setSubCategoriesMap((prev) => (prev[cat] ? prev : { ...prev, [cat]: [] }));
-    setMainCategory(cat);
-    setSubCategory('');
-    setNewMainCatName('');
-    setShowNewMainCat(false);
+    try {
+      await addMainCategory(cat);
+      setMainCategory(cat);
+      setSubCategory('');
+      setNewMainCatName('');
+      setShowNewMainCat(false);
+    } catch (err) {
+      console.error('Failed to add category:', err);
+      alert('Failed to add category. Please try again.');
+    }
   };
 
-  const handleAddNewSubCategory = () => {
+  const handleAddNewSubCategory = async () => {
     if (!newCatName.trim()) return;
     const sub = newCatName.trim();
-    setSubCategoriesMap((prev) => {
-      const existing = prev[mainCategory] || [];
-      if (existing.includes(sub)) return prev;
-      return { ...prev, [mainCategory]: [...existing, sub] };
-    });
+    try {
+      await addSubCategory(mainCategory, sub);
+    } catch (err) {
+      console.error('Failed to add sub-category:', err);
+      alert('Failed to add sub-category. Please try again.');
+      return;
+    }
     setSubCategory(sub);
     setNewCatName('');
     setShowNewCat(false);
@@ -264,6 +277,12 @@ export default function AdminProductForm() {
             </svg>
             Products
           </Link>
+          <Link to="/admin/categories" className="nav-item">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 4H10L12 7H20V19H4V4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+            </svg>
+            Categories
+          </Link>
           <div className="nav-item">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -326,6 +345,7 @@ export default function AdminProductForm() {
                   {mainCategoryOptions.map((cat) => (
                     <option key={cat}>{cat}</option>
                   ))}
+                  {mainCategory && !mainCategoryOptions.includes(mainCategory) && <option>{mainCategory}</option>}
                 </select>
               </div>
               <div className="apf-field">

@@ -5,6 +5,7 @@ import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/Listing.css';
 import Footer from '../components/Footer';
+import useCategories from '../hooks/useCategories';
 
 const IconTee = () => (
   <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" strokeWidth="2.2" /></svg>
@@ -25,25 +26,13 @@ function iconForCategory(category) {
   return IconTee;
 }
 
-const CATEGORY_MENU = [
-  {
-    name: 'T-Shirts',
-    subCategories: ["Men's T-Shirts", "Women's T-Shirts", 'Kids T-Shirts', 'Graphic Tees', 'Plain/Basic Tees'],
-  },
-  {
-    name: 'Shoes',
-    subCategories: ["Men's Shoes", "Women's Shoes", 'Kids Shoes', 'Sports/Sneakers', 'Sandals'],
-  },
-  {
-    name: 'Crockery',
-    subCategories: ['Plates', 'Bowls', 'Dinner Sets', 'Serving Platters', 'Drinking Glasses', 'Mugs', 'Tea Sets', 'Cups & Saucers'],
-  },
-];
-
 export default function Listing() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart, totalItems } = useCart();
+  // Category menu, sidebar filters, and counts now reflect whatever the
+  // admin has added/deleted from Admin > Categories, instead of a fixed list.
+  const { categories: CATEGORY_MENU } = useCategories();
 
   const activeCategory = searchParams.get('category') || '';
   const activeSub = searchParams.get('sub') || '';
