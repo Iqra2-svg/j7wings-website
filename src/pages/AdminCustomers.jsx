@@ -55,12 +55,6 @@ export default function AdminCustomers() {
             </svg>
             Products
           </Link>
-          <Link to="/admin/categories" className="nav-item">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 4H10L12 7H20V19H4V4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-            </svg>
-            Categories
-          </Link>
           <Link to="/admin/orders" className="nav-item">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />

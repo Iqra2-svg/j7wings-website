@@ -19,14 +19,15 @@ export default function AdminProductForm() {
   const [newMainCatName, setNewMainCatName] = useState('');
 
   // Categories now live in Firestore (the "categories" collection) so that
-  // adding one here — or deleting one from Admin > Categories — is permanent
-  // and shows up the same way everywhere (this form, the storefront nav,
-  // and the listing page filters).
+  // adding or deleting one here is permanent and shows up the same way
+  // everywhere (this form, the storefront nav, and the listing page filters).
   const {
     subCategoriesMap,
     mainCategoryOptions,
     addMainCategory,
     addSubCategory,
+    deleteMainCategory,
+    deleteSubCategory,
   } = useCategories();
 
   // Form fields
@@ -182,6 +183,36 @@ export default function AdminProductForm() {
     setShowNewCat(false);
   };
 
+  const handleDeleteMainCategory = async () => {
+    if (!mainCategory) return;
+    if (
+      !window.confirm(
+        `Delete the whole "${mainCategory}" category (and all its sub-categories)? Products already saved under it will keep showing it, but it will no longer appear in this dropdown. This cannot be undone.`
+      )
+    )
+      return;
+    try {
+      await deleteMainCategory(mainCategory);
+      setMainCategory('');
+      setSubCategory('');
+    } catch (err) {
+      console.error('Failed to delete category:', err);
+      alert('Failed to delete category. Please try again.');
+    }
+  };
+
+  const handleDeleteSubCategory = async () => {
+    if (!mainCategory || !subCategory) return;
+    if (!window.confirm(`Delete sub-category "${subCategory}" from ${mainCategory}?`)) return;
+    try {
+      await deleteSubCategory(mainCategory, subCategory);
+      setSubCategory('');
+    } catch (err) {
+      console.error('Failed to delete sub-category:', err);
+      alert('Failed to delete sub-category. Please try again.');
+    }
+  };
+
   const handleCancel = () => {
     navigate('/admin/dashboard');
   };
@@ -277,12 +308,6 @@ export default function AdminProductForm() {
             </svg>
             Products
           </Link>
-          <Link to="/admin/categories" className="nav-item">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 4H10L12 7H20V19H4V4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-            </svg>
-            Categories
-          </Link>
           <div className="nav-item">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M6 9H4L2 5H1M6 9L4.6 15.6C4.5 16.3 5.1 17 5.8 17H17.3C18 17 18.5 16.3 18.4 15.6L16 5H6M6 9H16" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -337,8 +362,15 @@ export default function AdminProductForm() {
               <div className="apf-field">
                 <label>
                   Main Category
-                  <span className="add-new-link" onClick={() => setShowNewMainCat((v) => !v)}>
-                    + Add New Category
+                  <span className="apf-label-actions">
+                    <span className="add-new-link" onClick={() => setShowNewMainCat((v) => !v)}>
+                      + Add New Category
+                    </span>
+                    {mainCategory && (
+                      <span className="delete-link" onClick={handleDeleteMainCategory}>
+                        Delete This Category
+                      </span>
+                    )}
                   </span>
                 </label>
                 <select value={mainCategory} onChange={handleMainCategoryChange}>
@@ -351,8 +383,15 @@ export default function AdminProductForm() {
               <div className="apf-field">
                 <label>
                   Sub-Category
-                  <span className="add-new-link" onClick={() => setShowNewCat((v) => !v)}>
-                    + Add New Sub-Category
+                  <span className="apf-label-actions">
+                    <span className="add-new-link" onClick={() => setShowNewCat((v) => !v)}>
+                      + Add New Sub-Category
+                    </span>
+                    {subCategory && (
+                      <span className="delete-link" onClick={handleDeleteSubCategory}>
+                        Delete This Sub-Category
+                      </span>
+                    )}
                   </span>
                 </label>
                 <select value={subCategory} onChange={(e) => setSubCategory(e.target.value)}>

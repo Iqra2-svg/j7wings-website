@@ -4,7 +4,6 @@ import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
-import useCategories from '../hooks/useCategories';
 import '../styles/Home.css';
 
 const IconTee = () => (
@@ -24,14 +23,26 @@ const IconBowl = () => (
   </svg>
 );
 
+const CATEGORY_MENU = [
+  {
+    name: 'T-Shirts',
+    subCategories: ["Men's T-Shirts", "Women's T-Shirts", 'Kids T-Shirts', 'Graphic Tees', 'Plain/Basic Tees'],
+  },
+  {
+    name: 'Shoes',
+    subCategories: ["Men's Shoes", "Women's Shoes", 'Kids Shoes', 'Sports/Sneakers', 'Sandals'],
+  },
+  {
+    name: 'Crockery',
+    subCategories: ['Plates', 'Bowls', 'Dinner Sets', 'Serving Platters', 'Drinking Glasses', 'Mugs', 'Tea Sets', 'Cups & Saucers'],
+  },
+];
+
 export default function Home() {
   const [headerSearch, setHeaderSearch] = useState('');
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const navigate = useNavigate();
   const { addToCart, totalItems } = useCart();
-  // Nav "Shop by Category" menu now reflects whatever categories the admin
-  // has added/deleted from Admin > Categories, instead of a fixed list.
-  const { categories: CATEGORY_MENU } = useCategories();
 
   const [newArrivals, setNewArrivals] = useState([]);
   const [specials, setSpecials] = useState([]);

@@ -27,11 +27,6 @@ const IconCustomers = () => (
     <path d="M17 21V19C17 16.79 15.21 15 13 15H5C2.79 15 1 16.79 1 19V21M23 21V19C23 17.13 21.73 15.56 20 15.11M16 3.11C17.73 3.56 19 5.13 19 7C19 8.87 17.73 10.44 16 10.89M13 7C13 9.21 11.21 11 9 11C6.79 11 5 9.21 5 7C5 4.79 6.79 3 9 3C11.21 3 13 4.79 13 7Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-const IconCategories = () => (
-  <svg viewBox="0 0 24 24" fill="none">
-    <path d="M4 4H10L12 7H20V19H4V4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-  </svg>
-);
 const IconSettings = () => (
   <svg viewBox="0 0 24 24" fill="none">
     <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.7" />
@@ -194,10 +189,6 @@ export default function AdminDashboard() {
           <Link to="/admin/dashboard" className="nav-item">
             <IconProducts />
             Products
-          </Link>
-          <Link to="/admin/categories" className="nav-item">
-            <IconCategories />
-            Categories
           </Link>
           <Link to="/admin/orders" className="nav-item">
             <IconOrders />

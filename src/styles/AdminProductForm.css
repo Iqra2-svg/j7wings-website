@@ -47,6 +47,9 @@ h1,h2,h3{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing
   .apf-field-hint{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#A6A196;}
   .add-new-link{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--amber-dark);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0;}
   .add-new-link:hover{color:var(--navy);}
+  .apf-label-actions{display:flex;gap:10px;}
+  .delete-link{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--danger);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0;}
+  .delete-link:hover{text-decoration:underline;}
 
   /* inline new category box */
   .new-cat-box{display:none;background:var(--paper);border:1px dashed var(--navy);padding:16px;margin-top:10px;grid-column:1/-1;}

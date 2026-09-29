@@ -21,7 +21,6 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminProductForm from './pages/AdminProductForm';
 import AdminOrders from './pages/AdminOrders';
 import AdminCustomers from './pages/AdminCustomers';
-import AdminCategories from './pages/AdminCategories';
 
 export default function App() {
   return (
@@ -64,14 +63,6 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <AdminProductForm />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/categories"
-            element={
-              <ProtectedRoute>
-                <AdminCategories />
               </ProtectedRoute>
             }
           />
