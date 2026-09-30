@@ -112,8 +112,8 @@ export default function OrderConfirmation() {
     <>
       <div className="topbar">
         <div className="wrap">
-          <span>MIN. ORDER $500</span>
-          <span>Need help? +92 300 000 0000</span>
+          <span>MIN. ORDER $50</span>
+          <span>Need help? +39 3277454944</span>
         </div>
       </div>
 

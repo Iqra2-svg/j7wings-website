@@ -218,7 +218,7 @@ export default function AboutContact() {
               </div>
               <div>
                 <div className="label">Email</div>
-                <div className="val">orders@j7wings.com</div>
+                <div className="val">Support@j7wings.com</div>
                 <div className="sub">For order and account queries</div>
               </div>
             </div>
@@ -236,7 +236,7 @@ export default function AboutContact() {
               </div>
               <div>
                 <div className="label">Phone</div>
-                <div className="val">+92 300 000 0000</div>
+                <div className="val">+39 3277454944</div>
                 <div className="sub">Mon&ndash;Sat, 9AM&ndash;6PM PKT</div>
               </div>
             </div>
@@ -253,8 +253,8 @@ export default function AboutContact() {
               </div>
               <div>
                 <div className="label">Warehouse</div>
-                <div className="val">Satellite Town, Rawalpindi</div>
-                <div className="sub">Punjab, Pakistan 46000</div>
+                <div className="val">Via Santa Colomba 2</div>
+                <div className="sub">62010 Mogliano, Italy</div>
               </div>
             </div>
           </div>

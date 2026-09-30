@@ -125,9 +125,9 @@ export default function Home() {
     <div className="page-home">
       <div className="topbar">
         <div className="wrap">
-          <span>MIN. ORDER $500</span>
+          <span>MIN. ORDER $50</span>
           <span>
-            <a href="#">Contact Us</a> &nbsp;|&nbsp; +92 300 000 0000
+            <a href="#">Contact Us</a> &nbsp;|&nbsp; +39 3277454944
           </span>
         </div>
       </div>
