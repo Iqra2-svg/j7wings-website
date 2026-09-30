@@ -75,6 +75,23 @@ nav.primary a.current{color:var(--amber-dark);}
   .cat-mega-col{border-right:none;border-bottom:1px solid var(--line);padding:14px 20px;}
   .cat-mega-col:last-child{border-bottom:none;}
 }
+
+/* Shared horizontal category bar (CategoryNav component) — category names in
+   a row, sub-categories appear on hover. Classes are prefixed "catnav-" so
+   they never collide with the older .cat-* rules above. */
+.catnav{display:flex;flex-wrap:wrap;gap:26px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.catnav-item{position:relative;}
+.catnav-label{font-family:'Oswald',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:0.03em;text-transform:uppercase;color:var(--navy);cursor:pointer;white-space:nowrap;}
+.catnav-label:hover{color:var(--amber-dark);}
+.catnav-drop{display:none;position:absolute;top:calc(100% + 10px);left:0;z-index:60;background:#fff;border:1px solid var(--line);box-shadow:0 16px 32px rgba(22,35,63,0.15);min-width:200px;padding:12px 0;flex-direction:column;}
+.catnav-item:hover .catnav-drop{display:flex;}
+.catnav-drop-link{font-family:'Inter',sans-serif;font-size:13.5px;color:#4A4A46;padding:8px 20px;cursor:pointer;white-space:nowrap;}
+.catnav-drop-link:hover{color:var(--amber-dark);background:var(--paper);}
+
+@media(max-width:900px){
+  .catnav{gap:16px;overflow-x:auto;flex-wrap:nowrap;}
+}
+
 .search-input-wrap{flex:1;display:flex;border:1.5px solid var(--navy);border-left:none;}
 .search-input-wrap input{flex:1;border:none;padding:0 16px;font-family:'Inter',sans-serif;font-size:14px;outline:none;background:#fff;}
 .search-input-wrap button{background:var(--amber);border:none;padding:0 20px;cursor:pointer;}

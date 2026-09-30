@@ -5,6 +5,7 @@ import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/SearchResults.css';
 import Footer from '../components/Footer';
+import CategoryNav from '../components/CategoryNav';
 
 const IconTee = () => (
   <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" strokeWidth="2.2" /></svg>
@@ -130,12 +131,6 @@ export default function SearchResults() {
             </div>
           </div>
           <div className="search-row">
-            <Link to="/listing" className="cat-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M4 6H20M4 12H20M4 18H14" stroke="white" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-              ALL CATEGORIES
-            </Link>
             <form className="search-input-wrap" onSubmit={(e) => e.preventDefault()}>
               <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               <button type="submit">
@@ -150,6 +145,7 @@ export default function SearchResults() {
               </button>
             </form>
           </div>
+          <CategoryNav />
         </div>
       </header>
 

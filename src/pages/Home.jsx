@@ -4,6 +4,7 @@ import { collection, getDocs, limit, query, where, onSnapshot } from 'firebase/f
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
+import CategoryNav from '../components/CategoryNav';
 import '../styles/Home.css';
 
 const IconTee = () => (
@@ -25,7 +26,6 @@ const IconBowl = () => (
 
 export default function Home() {
   const [headerSearch, setHeaderSearch] = useState('');
-  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const navigate = useNavigate();
   const { addToCart, totalItems } = useCart();
   // Nav "Shop by Category" menu reads the same Firestore "categories"
@@ -120,13 +120,6 @@ export default function Home() {
     }
   };
 
-  const goToCategory = (category, sub) => {
-    const params = new URLSearchParams();
-    if (category) params.set('category', category);
-    if (sub) params.set('sub', sub);
-    navigate(`/listing${params.toString() ? `?${params.toString()}` : ''}`);
-    setShowCategoryMenu(false);
-  };
 
   return (
     <div className="page-home">
@@ -186,53 +179,6 @@ export default function Home() {
             </div>
           </div>
           <div className="search-row">
-            <div className="cat-dropdown-wrapper">
-              <button
-                type="button"
-                className="cat-btn"
-                onClick={() => setShowCategoryMenu((v) => !v)}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6H20M4 12H20M4 18H14" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-                ALL CATEGORIES
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  style={{ transform: showCategoryMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s ease' }}
-                >
-                  <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {showCategoryMenu && (
-                <div className="cat-mega-menu">
-                  {CATEGORY_MENU.map((cat) => (
-                    <div className="cat-mega-col" key={cat.name}>
-                      <span
-                        className="cat-mega-heading"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => goToCategory(cat.name)}
-                      >
-                        {cat.name}
-                      </span>
-                      {cat.subCategories.map((sub) => (
-                        <span
-                          key={sub}
-                          className="cat-mega-link"
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => goToCategory(cat.name, sub)}
-                        >
-                          {sub}
-                        </span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
             <form className="search-input-wrap" onSubmit={handleSearchSubmit}>
               <input
                 type="text"
@@ -252,6 +198,7 @@ export default function Home() {
               </button>
             </form>
           </div>
+          <CategoryNav />
         </div>
       </header>
 

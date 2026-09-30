@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import '../styles/Listing.css';
 import Footer from '../components/Footer';
+import CategoryNav from '../components/CategoryNav';
 
 const IconTee = () => (
   <svg viewBox="0 0 64 64" fill="none"><path d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z" stroke="#16233F" strokeWidth="2.2" /></svg>
@@ -25,25 +26,26 @@ function iconForCategory(category) {
   return IconTee;
 }
 
-const CATEGORY_MENU = [
-  {
-    name: 'T-Shirts',
-    subCategories: ["Men's T-Shirts", "Women's T-Shirts", 'Kids T-Shirts', 'Graphic Tees', 'Plain/Basic Tees'],
-  },
-  {
-    name: 'Shoes',
-    subCategories: ["Men's Shoes", "Women's Shoes", 'Kids Shoes', 'Sports/Sneakers', 'Sandals'],
-  },
-  {
-    name: 'Crockery',
-    subCategories: ['Plates', 'Bowls', 'Dinner Sets', 'Serving Platters', 'Drinking Glasses', 'Mugs', 'Tea Sets', 'Cups & Saucers'],
-  },
-];
-
 export default function Listing() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { addToCart, totalItems } = useCart();
+  // Category menu, sidebar filters, and counts read the same Firestore
+  // "categories" collection the admin manages from the Add/Edit Product page.
+  const [CATEGORY_MENU, setCategoryMenu] = useState([]);
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, 'categories'),
+      (snapshot) => {
+        const list = snapshot.docs
+          .map((d) => ({ name: d.data().name || d.id, subCategories: d.data().subCategories || [] }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        setCategoryMenu(list);
+      },
+      (err) => console.error('Failed to load categories:', err)
+    );
+    return () => unsub();
+  }, []);
 
   const activeCategory = searchParams.get('category') || '';
   const activeSub = searchParams.get('sub') || '';
@@ -54,7 +56,6 @@ export default function Listing() {
   const [view, setView] = useState('grid');
   const [sort, setSort] = useState('Inventory');
   const [headerSearch, setHeaderSearch] = useState('');
-  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
 
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -205,40 +206,6 @@ export default function Listing() {
             </div>
           </div>
           <div className="search-row">
-            <div className="cat-dropdown-wrapper">
-              <button type="button" className="cat-btn" onClick={() => setShowCategoryMenu((v) => !v)}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6H20M4 12H20M4 18H14" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-                ALL CATEGORIES
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  style={{ transform: showCategoryMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s ease' }}
-                >
-                  <path d="M6 9L12 15L18 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {showCategoryMenu && (
-                <div className="cat-mega-menu">
-                  {CATEGORY_MENU.map((cat) => (
-                    <div className="cat-mega-col" key={cat.name}>
-                      <span className="cat-mega-heading" style={{ cursor: 'pointer' }} onClick={() => goToCategory(cat.name)}>
-                        {cat.name}
-                      </span>
-                      {cat.subCategories.map((sub) => (
-                        <span key={sub} className="cat-mega-link" style={{ cursor: 'pointer' }} onClick={() => goToCategory(cat.name, sub)}>
-                          {sub}
-                        </span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
             <form className="search-input-wrap" onSubmit={handleSearchSubmit}>
               <input
                 type="text"
@@ -258,6 +225,7 @@ export default function Listing() {
               </button>
             </form>
           </div>
+          <CategoryNav />
         </div>
       </header>
 
