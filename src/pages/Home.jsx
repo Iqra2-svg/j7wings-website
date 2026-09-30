@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { collection, getDocs, limit, query, where } from 'firebase/firestore';
+import { collection, getDocs, limit, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
@@ -23,26 +23,28 @@ const IconBowl = () => (
   </svg>
 );
 
-const CATEGORY_MENU = [
-  {
-    name: 'T-Shirts',
-    subCategories: ["Men's T-Shirts", "Women's T-Shirts", 'Kids T-Shirts', 'Graphic Tees', 'Plain/Basic Tees'],
-  },
-  {
-    name: 'Shoes',
-    subCategories: ["Men's Shoes", "Women's Shoes", 'Kids Shoes', 'Sports/Sneakers', 'Sandals'],
-  },
-  {
-    name: 'Crockery',
-    subCategories: ['Plates', 'Bowls', 'Dinner Sets', 'Serving Platters', 'Drinking Glasses', 'Mugs', 'Tea Sets', 'Cups & Saucers'],
-  },
-];
-
 export default function Home() {
   const [headerSearch, setHeaderSearch] = useState('');
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const navigate = useNavigate();
   const { addToCart, totalItems } = useCart();
+  // Nav "Shop by Category" menu reads the same Firestore "categories"
+  // collection the admin manages from the Add/Edit Product page, so
+  // adding/deleting a category there shows up here automatically.
+  const [CATEGORY_MENU, setCategoryMenu] = useState([]);
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, 'categories'),
+      (snapshot) => {
+        const list = snapshot.docs
+          .map((d) => ({ name: d.data().name || d.id, subCategories: d.data().subCategories || [] }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        setCategoryMenu(list);
+      },
+      (err) => console.error('Failed to load categories:', err)
+    );
+    return () => unsub();
+  }, []);
 
   const [newArrivals, setNewArrivals] = useState([]);
   const [specials, setSpecials] = useState([]);
@@ -84,19 +86,23 @@ export default function Home() {
       setLoading(false);
     }
     fetchProducts();
+  }, []);
 
-    // Pull one product photo per category (whichever has an image uploaded)
-    // to use as the "Shop by Category" card background.
+  // Pull one product photo per category (whichever has an image uploaded)
+  // to use as the "Shop by Category" card background. Re-runs whenever the
+  // live category list changes, so a newly-added category picks up an image
+  // too and a deleted one simply drops off (its card disappears below).
+  useEffect(() => {
+    if (CATEGORY_MENU.length === 0) return;
     async function fetchCategoryImages() {
-      const categories = ['T-Shirts', 'Shoes', 'Crockery'];
       const images = {};
       try {
         await Promise.all(
-          categories.map(async (cat) => {
-            const q = query(collection(db, 'products'), where('category', '==', cat), limit(10));
+          CATEGORY_MENU.map(async (cat) => {
+            const q = query(collection(db, 'products'), where('category', '==', cat.name), limit(10));
             const snap = await getDocs(q);
             const withImage = snap.docs.find((d) => d.data().imageUrl);
-            if (withImage) images[cat] = withImage.data().imageUrl;
+            if (withImage) images[cat.name] = withImage.data().imageUrl;
           })
         );
         setCategoryImages(images);
@@ -105,7 +111,7 @@ export default function Home() {
       }
     }
     fetchCategoryImages();
-  }, []);
+  }, [CATEGORY_MENU]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -311,93 +317,34 @@ export default function Home() {
             </Link>
           </div>
           <div className="cat-grid">
-            <Link to="/listing?category=T-Shirts" className="cat-card cc-1">
-              <div className="img">
-                {categoryImages['T-Shirts'] ? (
-                  <img
-                    src={categoryImages['T-Shirts']}
-                    alt="T-Shirts"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <svg viewBox="0 0 64 64" fill="none">
-                  <path
-                    d="M20 8L14 16V56H50V16L44 8H36L32 14L28 8H20Z"
-                    stroke="#16233F"
-                    strokeWidth="2.5"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M14 16L8 20L14 26"
-                    stroke="#16233F"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M50 16L56 20L50 26"
-                    stroke="#16233F"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                )}
-              </div>
-              <div className="body">
-                <div className="num">CAT-01</div>
-                <h3>T-Shirts</h3>
-                <span className="cta">Browse 8 lines &rarr;</span>
-              </div>
-            </Link>
-            <Link to="/listing?category=Shoes" className="cat-card cc-2">
-              <div className="img">
-                {categoryImages['Shoes'] ? (
-                  <img
-                    src={categoryImages['Shoes']}
-                    alt="Shoes"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <svg viewBox="0 0 64 64" fill="none">
-                  <path
-                    d="M8 46C8 46 12 38 20 38C24 38 24 42 30 42C36 42 38 34 46 34C52 34 56 40 56 40V50H8V46Z"
-                    stroke="#16233F"
-                    strokeWidth="2.5"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M14 38V24C14 24 20 20 26 24" stroke="#16233F" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-                )}
-              </div>
-              <div className="body">
-                <div className="num">CAT-02</div>
-                <h3>Shoes</h3>
-                <span className="cta">Browse 8 lines &rarr;</span>
-              </div>
-            </Link>
-            <Link to="/listing?category=Crockery" className="cat-card cc-3">
-              <div className="img">
-                {categoryImages['Crockery'] ? (
-                  <img
-                    src={categoryImages['Crockery']}
-                    alt="Crockery"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <svg viewBox="0 0 64 64" fill="none">
-                  <ellipse cx="32" cy="44" rx="22" ry="6" stroke="#16233F" strokeWidth="2.5" />
-                  <path d="M10 44V30C10 24 20 20 32 20C44 20 54 24 54 30V44" stroke="#16233F" strokeWidth="2.5" />
-                  <path d="M46 26C50 24 54 26 54 30" stroke="#16233F" strokeWidth="2.5" strokeLinecap="round" />
-                </svg>
-                )}
-              </div>
-              <div className="body">
-                <div className="num">CAT-03</div>
-                <h3>Crockery</h3>
-                <span className="cta">Browse 5 lines &rarr;</span>
-              </div>
-            </Link>
+            {CATEGORY_MENU.length === 0 && (
+              <p style={{ color: '#8A8577', fontFamily: 'IBM Plex Mono, monospace', fontSize: '13px' }}>
+                No categories yet — add one from the Admin &gt; Add/Edit Product page.
+              </p>
+            )}
+            {CATEGORY_MENU.map((cat, i) => {
+              const Icon = iconForCategory(cat.name);
+              return (
+                <Link to={`/listing?category=${encodeURIComponent(cat.name)}`} className={`cat-card cc-${(i % 3) + 1}`} key={cat.name}>
+                  <div className="img">
+                    {categoryImages[cat.name] ? (
+                      <img
+                        src={categoryImages[cat.name]}
+                        alt={cat.name}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <Icon />
+                    )}
+                  </div>
+                  <div className="body">
+                    <div className="num">CAT-{String(i + 1).padStart(2, '0')}</div>
+                    <h3>{cat.name}</h3>
+                    <span className="cta">Browse {cat.subCategories.length} lines &rarr;</span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
