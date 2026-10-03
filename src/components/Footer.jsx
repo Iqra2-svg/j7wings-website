@@ -20,13 +20,13 @@ export default function Footer() {
             <h4>Guidelines</h4>
             <ul>
               <li>
-                <a href="#">Terms &amp; Conditions</a>
+                <Link to="/policies#terms">Terms &amp; Conditions</Link>
               </li>
               <li>
-                <a href="#">Shipping Policy</a>
+                <Link to="/policies#shipping">Shipping Policy</Link>
               </li>
               <li>
-                <a href="#">Privacy Policy</a>
+                <Link to="/policies#privacy">Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -68,7 +68,7 @@ export default function Footer() {
                 <a href="#">Feedback</a>
               </li>
               <li>
-                <a href="#">FAQ</a>
+                <Link to="/policies#faq">FAQ</Link>
               </li>
             </ul>
           </div>

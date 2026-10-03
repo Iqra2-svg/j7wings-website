@@ -1,0 +1,33 @@
+/* Shared header/topbar/footer/base styles live in Layout.css (imported once
+   in App.jsx). This file only adds the Policies page's own look — classes
+   are prefixed "pol-" so they never collide with other pages' CSS. */
+
+.pol-hero{background:var(--navy);color:#fff;padding:52px 0;}
+.pol-hero .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.18em;color:var(--amber);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.pol-hero .eyebrow::before{content:'';width:24px;height:1px;background:var(--amber);}
+.pol-hero h1{font-size:32px;line-height:1.2;margin:0 0 12px;max-width:680px;}
+.pol-hero p{font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;color:#C9CEDA;max-width:560px;margin:0;}
+
+.pol-layout{display:grid;grid-template-columns:220px 1fr;gap:50px;padding:50px 0 70px;align-items:start;}
+
+.pol-sidenav{position:sticky;top:24px;display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);background:var(--paper);padding:10px;}
+.pol-sidenav a{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#5A5A54;padding:11px 12px;text-decoration:none;}
+.pol-sidenav a:hover{color:var(--amber-dark);background:#fff;}
+
+.pol-content{min-width:0;}
+.pol-section{padding-bottom:46px;margin-bottom:46px;border-bottom:1px solid var(--line);scroll-margin-top:90px;}
+.pol-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.pol-section h2{font-size:23px;margin:0 0 20px;color:var(--navy);}
+.pol-section h3{font-size:14.5px;margin:22px 0 8px;text-transform:none;letter-spacing:0;color:var(--navy);}
+.pol-section h3:first-of-type{margin-top:0;}
+.pol-section p{font-size:14px;line-height:1.75;color:#4A4A46;margin:0 0 4px;}
+
+.pol-faq-item{margin-bottom:22px;}
+.pol-faq-item:last-child{margin-bottom:0;}
+.pol-faq-item h3{margin:0 0 6px;}
+
+@media(max-width:900px){
+  nav.primary{display:none;}
+  .pol-layout{grid-template-columns:1fr;gap:28px;}
+  .pol-sidenav{position:static;flex-direction:row;overflow-x:auto;}
+}

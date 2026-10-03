@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import OrderConfirmation from './pages/OrderConfirmation';
 import SearchResults from './pages/SearchResults';
 import AboutContact from './pages/AboutContact';
+import Policies from './pages/Policies';
 
 // Admin pages
 import AdminLogin from './pages/AdminLogin';
@@ -39,6 +40,7 @@ export default function App() {
           <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/about" element={<AboutContact />} />
+          <Route path="/policies" element={<Policies />} />
 
           {/* Admin — login stays open, everything else requires a signed-in admin */}
           <Route path="/admin/login" element={<AdminLogin />} />
