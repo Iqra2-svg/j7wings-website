@@ -65,7 +65,7 @@ export default function Footer() {
                 <a href="#">Have Products to Sell?</a>
               </li>
               <li>
-                <a href="#">Feedback</a>
+                <Link to="/feedback">Feedback</Link>
               </li>
               <li>
                 <Link to="/policies#faq">FAQ</Link>
