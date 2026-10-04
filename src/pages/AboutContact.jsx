@@ -112,7 +112,7 @@ export default function AboutContact() {
             <h2>Our Story</h2>
             <p>
               J7 Wings started as a small import operation supplying local retailers in
-              Rawalpindi and Islamabad. Today we distribute apparel, footwear, and crockery to
+              Columba, Italy. Today we distribute apparel, footwear, and crockery to
               shop owners across the region &mdash; sourcing in bulk so our buyers never pay
               retail markup.
             </p>
@@ -127,7 +127,7 @@ export default function AboutContact() {
                 <div className="l">Core Categories</div>
               </div>
               <div className="stat">
-                <div className="n">$500</div>
+                <div className="n">$50</div>
                 <div className="l">Order Minimum</div>
               </div>
               <div className="stat">

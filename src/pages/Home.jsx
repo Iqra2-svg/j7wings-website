@@ -430,7 +430,7 @@ export default function Home() {
                 <div className="l">Core Categories</div>
               </div>
               <div className="stat">
-                <div className="n">$500</div>
+                <div className="n">$50</div>
                 <div className="l">Order Minimum</div>
               </div>
               <div className="stat">
@@ -450,7 +450,7 @@ export default function Home() {
             </div>
             <div className="row">
               <span className="k">FREIGHT</span>
-              <span className="v">FREE OVER $500</span>
+              <span className="v">FREE OVER $50</span>
             </div>
             <div className="row">
               <span className="k">CATALOG UPDATED</span>
