@@ -144,7 +144,7 @@ export default function AboutContact() {
             </div>
             <div className="row">
               <span className="k">HEADQUARTERS</span>
-              <span className="v">RAWALPINDI, PK</span>
+              <span className="v">Via Santa Colomba 2, 62010 Mogliano, Italy</span>
             </div>
             <div className="row">
               <span className="k">SERVES</span>
