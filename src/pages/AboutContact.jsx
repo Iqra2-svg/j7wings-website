@@ -296,7 +296,7 @@ export default function AboutContact() {
               </div>
               <div className="abt-field">
                 <label>Phone</label>
-                <input type="tel" placeholder="+92 3XX XXXXXXX" value={form.phone} onChange={updateField('phone')} />
+                <input type="tel" placeholder="+39 3XX XXXXXXX" value={form.phone} onChange={updateField('phone')} />
               </div>
             </div>
             <div className="abt-field-row">
